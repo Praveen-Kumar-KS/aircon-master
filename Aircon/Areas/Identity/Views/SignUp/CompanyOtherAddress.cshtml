@@ -1,0 +1,72 @@
+﻿@model CustomerOpportunityAddressViewModel
+@using Aircon.Data.Entities
+@{
+    ViewData["Title"] = "USER DETAILS";
+    Layout = "_OnboardingLayout";
+    ViewData["OnboardingImage"] = "/assets/onboarding/Company.png";
+    var customerAddressTypes = LookupHelper.GetCustomerAddressTypeItems<AddressType>();
+
+
+}
+
+
+<div class="login-box-login">
+    <div class="col-md-12 pl-0 pr-0 mb-20">
+        <h2>LET'S GET YOU SET UP</h2>
+        <h3 class="mt-20 font-normal">Additional Addresses (Optional)</h3>
+    </div>
+    <div class="col-md-12 pl-0 pr-0">
+        <form asp-controller="SignUp" asp-action="CompanyOtherAddressPost" method="post" role="form">
+            @Html.HiddenFor(x=> x.CustomerOpportunityId)
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form__group mb-20">
+                        <div class="mdl-selectfield mb-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select asp-items="@customerAddressTypes" asp-for="AddressTypeId" name="AddressTypeId" placeholder="Select Address Type" class="browser-default" required>
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">Address Type</label>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <air-input asp-for="NickName"></air-input>
+                </div>
+                <div class="col-md-12">
+                    <air-input asp-for="Line1"></air-input>
+                </div>
+                <div class="col-md-12">
+                    <air-input asp-for="Line2"></air-input>
+                </div>
+                <div class="col-md-12">
+                    <air-input asp-for="City"></air-input>
+                </div>
+                <div class="col-md-6">
+                    <air-input asp-for="State"></air-input>
+                </div>
+                <div class="col-md-6">
+                    <air-input asp-for="Zip"></air-input>
+                </div>
+                <div class="col-md-12 mt-30">
+                    <button name="Action" value="AddAddress" class="btn float-right btn-secondary"><span class="mdi mdi-plus-circle" /></button>
+                    <button name="Action" value="DeleteAddress" class="btn float-right btn-secondary" formnovalidate="formnovalidate" ><span class="mdi mdi-minus-circle" /></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-md-5 mt-30">
+                    <div class="company-progress  progress mb-10">
+                        <div class="company-progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>  <span class="text3">Sign-up process</span>
+                </div>
+                <div class="col-md-7 mt-30">
+                    @Html.HiddenFor(x=> x.CustomerOpportunityId)
+                    <button name="Action" value="Next" class="btn float-right btn-primary">Next</button>
+                    <button name="Action" value="Skip" formnovalidate="formnovalidate"   class="btn float-right btn-secondary">Skip</button>
+                    @*<button value="Upload" class="btn float-right btn-secondary">Upload CSV</button>*@
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

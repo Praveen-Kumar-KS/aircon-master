@@ -1,0 +1,138 @@
+﻿
+
+@model List<PaymentMethodViewModel>
+@{
+    var paymentTypes = Enum.GetValues(typeof(PaymentType)).Cast<PaymentType>().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+
+    var paymentMethodDefaults = Enum.GetValues(typeof(PaymentMethodDefault)).Cast<PaymentMethodDefault>().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+}
+@foreach (var item in Model)
+{
+    <div class="card m-t-10">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <div class="txt2 ">CARD 8898</div>
+                    <div class="addmore">
+                        <ul class="add-content">
+                            <li><i class="mdi mdi-minus" aria-hidden="true"></i> </li>
+                            <li><i class="mdi mdi-plus" aria-hidden="true"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <div class="form__group mb-20">
+                        <div class="mdl-selectfield m-b-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select asp-for="@item.PaymentType" class="browser-default" asp-items="@paymentTypes">
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">Type</label>
+                    </div>
+
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+
+                    <div class="form__group m-b-20">
+                        <div class="mdl-selectfield m-b-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select asp-for="@item.PaymentMethodDefault" class="browser-default" asp-items="paymentMethodDefaults">
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">Default For</label>
+                    </div>
+
+                </div>
+
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <div class="txt2 ">CARD DETAILS</div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <div class="form__group m-b-20">
+                        <input type="email" id="email" class="form__field" placeholder="" value="4400 6688 5658 8898">
+                        <label for="email" class="form__label">Card Number</label>
+                    </div>
+                </div>
+                <div class="col-xl-1 col-lg-2 col-md-3 col-sm-12 col-12">
+                    <div class="form__group m-b-20">
+                        <input type="email" id="email" class="form__field" placeholder="" value="05/24">
+                        <label for="email" class="form__label">Valid Thru</label>
+                    </div>
+                </div>
+                <div class="col-xl-1 col-lg-2 col-md-3 col-sm-12 col-12">
+                    <div class="form__group m-b-20">
+                        <input type="email" id="email" class="form__field" placeholder="" value="221">
+                        <label for="email" class="form__label">CVV</label>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <div class="form__group m-b-20">
+                        <input type="email" id="email" class="form__field" placeholder="" value="Rahul Nair">
+                        <label for="email" class="form__label">Name on Card</label>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h4 class="txt2 ">BILLING ADDRESS</h4>
+                </div>
+
+
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class=" m-b-20">
+                        <label class="checkbox1">
+                            Same as company address
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <div class="form__group mb-20">
+                        <input type="email" id="email" class="form__field" placeholder="" value="Seasky Shipping">
+                        <label for="email" class="form__label">Company Name</label>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <div class="form__group m-b-20">
+                        <input type="email" id="email" class="form__field" placeholder="" value="1458 Sagebrook Drive, STE 325">
+                        <label for="email" class="form__label">Address Line 1</label>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <div class="form__group m-b-20">
+                        <input type="email" id="email" class="form__field" placeholder="" value="Carter Building">
+                        <label for="email" class="form__label">Address Line 2</label>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <div class="form__group m-b-20">
+                        <input type="email" id="email" class="form__field" placeholder="" value="Houston">
+                        <label for="email" class="form__label">City</label>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <div class="form__group m-b-20">
+                        <input type="email" id="email" class="form__field" placeholder="" value="Texas">
+                        <label for="email" class="form__label">State</label>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <div class="form__group m-b-20">
+                        <input type="email" id="email" class="form__field" placeholder="" value="774586">
+                        <label for="email" class="form__label">Zip</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+

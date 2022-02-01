@@ -1,0 +1,56 @@
+﻿
+@using Aircon.Business.Services
+@using Aircon.Business.Helper
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["NavHeader"] = "Admin Workflow";
+}
+
+
+@section Styles {
+    <link rel="stylesheet" href="/assets/libs/css/style.css">
+
+    @if (IsSectionDefined("PageStyles"))
+    {@RenderSection("PageStyles", required: false)}
+}
+
+
+<div class="dashboard-main-wrapper">
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <div class="dashboard-header">
+        <partial name="_Navigation" />
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <partial name="_LeftSidebar" />
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="dashboard-wrapper">
+        <div class="">
+            <div class="container-fluid dashboard-content">
+                <div class="">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @if (IsSectionDefined("PageScripts"))
+        @RenderSection("PageScripts", required: false)
+
+}
+

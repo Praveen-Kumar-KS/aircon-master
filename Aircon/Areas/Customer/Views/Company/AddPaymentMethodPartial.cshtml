@@ -1,0 +1,185 @@
+﻿
+@model PaymentMethodViewModel
+@{
+    var paymentTypes = Enum.GetValues(typeof(PaymentType)).Cast<PaymentType>().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+
+    var paymentMethodDefaults = Enum.GetValues(typeof(PaymentMethodDefault)).Cast<PaymentMethodDefault>().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+
+    var accountTypes = Enum.GetValues(typeof(AccountType)).Cast<AccountType>().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+}
+<div>
+    <form asp-controller="Company" asp-action="AddPaymentMethod" method="post" role="form">
+        <div class="modal-header green-top">
+            <h6 class=" subtitle1 p-0 bold">New Payment Method</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="m-r-10 mdi txt-black mdi-close"></i>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <div class=" form__group mb-20">
+                        <div class="mdl-selectfield m-b-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select id="PaymentType" asp-for="PaymentType" asp-items="@paymentTypes" class="browser-default">
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">@Html.LabelFor(x => x.PaymentType)</label>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <div class=" form__group mb-20">
+                        <div class="mdl-selectfield m-b-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select id="PaymentMethodDefault" asp-for="PaymentMethodDefault" asp-items="@paymentMethodDefaults" class="browser-default">
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">@Html.LabelFor(x => x.PaymentMethodDefault)</label>
+                    </div>
+                </div>
+                <div class="payment-card col-xl-12  col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <div class="txt2 ">CARD DETAILS</div>
+                </div>
+                <div class="payment-card col-xl-5 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <air-input asp-for="CardNumber"></air-input>
+                </div>
+                <div class="payment-card col-xl-3 col-lg-2 col-md-3 col-sm-12 col-12">
+                    <air-input asp-for="CardValidThrough"></air-input>
+                </div>
+                <div class="payment-card col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12">
+                    <air-input asp-for="CardCvv"></air-input>
+                </div>
+                <div class="payment-card col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12">
+                </div>
+                <div class="payment-card col-xl-5 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <air-input asp-for="NameOnCard"></air-input>
+                </div>
+                <div class="payment-card col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h4 class="txt2 ">BILLING ADDRESS</h4>
+                </div>
+                <div class="payment-card col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="mt-20">
+                        <label asp-for="IsBillingAddressSameAsCompanyAddress" class="air-checkbox" style="display: inline-block;">
+                            Same as company address
+                            <input asp-for="IsBillingAddressSameAsCompanyAddress" />
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="payment-card billing-address col-xl-7 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <air-input asp-for="CompanyName"></air-input>
+                </div>
+                <div class="payment-card billing-address col-xl-6 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <air-input asp-for="BillingAddress.Line1"></air-input>
+                </div>
+                <div class="payment-card billing-address col-xl-6 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <air-input asp-for="BillingAddress.Line2"></air-input>
+                </div>
+                <div class="payment-card billing-address col-xl-4 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <air-input asp-for="BillingAddress.City"></air-input>
+                </div>
+                <div class="payment-card billing-address col-xl-4 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <air-input asp-for="BillingAddress.State"></air-input>
+                </div>
+                <div class="payment-card billing-address col-xl-4 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <air-input asp-for="BillingAddress.Zip"></air-input>
+                </div>
+
+
+
+                <div class="payment-ach col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <div class="txt2 ">ACH DETAILS</div>
+                </div>
+
+                <div class="payment-ach col-xl-4 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <div class="form__group m-b-20">
+                        <div class="mdl-selectfield m-b-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select class="browser-default" asp-for="AccountType" asp-items="@accountTypes">
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">Account Type</label>
+                    </div>
+                </div>
+                <div class="payment-ach col-xl-6 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <air-input asp-for="NameOnAccount"></air-input>
+                </div>
+
+                <div class="payment-ach col-xl-6 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <air-input asp-for="AccountNumber"></air-input>
+                </div>
+                <div class="payment-ach col-xl-6 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <air-input asp-for="ConfirmAccountNumber"></air-input>
+                </div>
+
+                <div class="payment-ach col-xl-4 col-lg-2 col-md-3 col-sm-12 col-12">
+                    <air-input asp-for="Routing"></air-input>
+                </div>
+                <div class="payment-ach col-xl-4 col-lg-2 col-md-3 col-sm-12 col-12">
+                    <air-input asp-for="ConfirmRouting"></air-input>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <div class="col-md-12 pb-30">
+                @Html.HiddenFor(x => x.PaymentMethodId)
+                @Html.HiddenFor(x => x.CustomerId)
+                <button class="btn float-right btn-primary" data-dismiss="modal">DISCARD CHANGES</button>
+                <button class="btn float-right btn-secondary">SAVE & CLOSE</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var paymentType = $("#PaymentType").val();
+        if (paymentType == 0) {
+            $('.payment-ach').hide();
+            $('.payment-card').show();
+        } else
+        {
+            $('.payment-card').hide();
+            $('.payment-ach').show();
+        }
+        var isBillingAddressSameAsCompanyAddress = $("#IsBillingAddressSameAsCompanyAddress").is(":checked");
+        if (isBillingAddressSameAsCompanyAddress) {
+            $('.billing-address').hide();
+        } else {
+            $('.billing-address').show();
+        }
+    });
+    $("#IsBillingAddressSameAsCompanyAddress").change(function () {
+        $(".billing-address").toggle();
+    });
+
+    $("#PaymentType").change(function () {
+        var paymentType = $("#PaymentType").val();
+        if (paymentType == 0) {
+            $('.payment-ach').hide();
+            $('.payment-card').show();
+        } else {
+            $('.payment-card').hide();
+            $('.payment-ach').show();
+        }
+    });
+
+</script>

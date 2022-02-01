@@ -1,0 +1,133 @@
+﻿
+@using Aircon.Areas.Customer.Models.Quotes
+<link href="~/assets/libs/css/style.css" rel="stylesheet" />
+
+@model QuotePricingViewModel
+
+    <div id="divContents">
+        <div class="modal-header">
+            <h4 class="text-center m-t-10 bold headtxt">AIRPORT TO AIRPORT INT'L</h4>
+            <hr />
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="m-r-10 mdi txt-black mdi-close"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div>
+                <input type="hidden" name="Id" id="Id" />
+                <table class="tablehead">
+                    <tr>
+                        <th class="quotetable">Quote#:</th>
+                    </tr>
+                    <tr>
+                        <th class="quotetable">Date:</th>
+                    </tr>
+                </table>
+                <h6 class="card-header bold frieghttxt">Frieght Information</h6>
+                <hr class="hrline1" />
+                <p class="pclass">Origin :</p>
+                <label class="lblorigin">_____________________________________________________________________</label>
+                <p class="pclass">Destination :</p>
+                <label class="lbldestination">_____________________________________________________________________</label>
+                <p class="pclass">Actual Weight :</p>
+                <label class="lblweight">_______________</label>
+                <p class="pclass" style="margin: -56px 247px;">Dim.</p>
+                <p class="pclass" style="margin: 20px 298px;">Weight:</p>
+                <label class="kg1">__________________</label>
+                <label class="kg2">__________________</label>
+                <label class="kg3">__________________</label>
+                <label class="kg4">__________________</label>
+                <label class="kg5">__________________</label>
+                <div class="dimension"> </div>
+                <h6 class="card-header bold routingtxt">Routing Information :</h6>
+                <hr class="hrline2" />
+                <p class="pclass">Airline Carrier :</p>
+                <label class="carrier">_______________________________________________________________________________________________________________________________________________________________________</label>
+                <p class="pclass" style="margin: -55px 181px;">Airline Carrier</p>
+                <br /><br />
+                <br /><br />
+                <p>
+                    Breakdown: WEIGHT :
+                    AIR FREIGHT [45.00MIN / per KG] :
+                    FUEL [INCLUDED] :
+                    SECURITY [INCLUDED] :
+                    SCREENING [20.00 MIN / Per kg - Actual] :
+                </p>
+                <p>TOTAL : </p>
+                <p>Notes Entered: ALL IN RATE - DIRECT - Visit https://www.aircanada.com/cargo for additional surcharge information</p>
+                <p class="pclass" style="margin-left: 723px;">Total Cost :</p>
+                <div class="cost"> </div>
+                <br /><br />
+                <br /><br />
+                <br /><br />
+                <h6 class="card-header bold additionaltxt">Additional Potential Airline Charges :</h6>
+                <p class="add1">LITHIUM BATTERY FEE : </p>
+                <p class="add2">MANUAL DATA ENTRY : </p>
+                <p class="add3">AWB CHARGES : </p>
+                <br /><br />
+                <h6 class="card-header bold additionaltxt">7L Quote Tool :</h6>
+
+                <table class="tablepercent">
+                    <tr class="tr">
+                        <th class="thpercent"></th>
+                        <th class="thpercent"></th>
+                        <th class="thpercent"></th>
+                        <th class="thpercent"></th>
+                        <th class="thpercent"></th>
+                        <th class="thpercent"></th>
+                    </tr>
+                    <tr class="tr">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="tr">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="tr">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <br />
+                <h6 class="card-header bold additionaltxt">Contact Information:</h6>
+                <hr class="hrline3" />
+                <p class="pickup" style="margin-left: 200px;">Pickup Agent</p>
+                <p class="pickupstatus" style="margin: -21px 170px;">Dropped to Airport</p>
+                <p class="pickup" style="margin: -46px 486px;">Delivery Agent</p>
+                <p class="pickupstatus" style="margin: 44px 457px;">Dropped to Airport</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="hidden" id="id" name="id" />
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button class="btn btn-primary" onclick="getPDF()">Save as PDF</button>
+    </div>
+
+   
+    <script type="text/javascript">
+        function getPDF() {
+            var element = document.getElementById('divContents').innerHTML;
+            html2pdf(element, {
+                margin: [0.3, 0, 0, 0],
+                filename: 'ATAQuote.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: 'avoid-all' }
+            });
+        };
+    </script>

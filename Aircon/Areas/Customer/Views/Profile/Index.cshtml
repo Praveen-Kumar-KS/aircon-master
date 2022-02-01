@@ -1,0 +1,77 @@
+﻿@using Aircon.Areas.Customer.Models.Profile
+
+@model UserProfileViewModel
+@{
+    Layout = "_CustomerSettingLayout";
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <form asp-controller="Profile" asp-action="SaveData" method="post" role="form">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card m-t-20">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Profile</h6></div>
+                </div>
+                <div class="card-body p-t-0">
+                    <div class="txt2 ">USER DETAILS</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.EditorFor(x => x.Avatar)
+                        </div>
+                        @*<div class="col-md-12">
+            <div class="file_input_div ">
+                <div class="row m-b-20">
+                    <div class="file-upload">
+                        <div class="file_input">
+                            <label class="upload-text">
+                                <i class="m-r-10 mdi mdi-upload"></i>
+                                <input id="file_input_file" class="none" type="file" />
+                            </label>
+                        </div>
+                        <div id="file_input_text_div" class="mdl-textfield mdl-js-textfield textfield-demo">
+                            <input class="file_input_text mdl-textfield__input no-border" type="text" disabled readonly id="file_input_text" />
+                            <label class="mdl-textfield__label" for="file_input_text"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-8 m-t-20">
+                        <p class="upload font-bold">Upload new photo  <span class="pr-16 pl-16 tab2 ">|</span>  Remove photo</p>
+                        <p class="upload font-normal">Logos help your customers recognize you.</p>
+                        <p class="upload dull-font">Use a png with a transparent background for best results. Minimum size 640px x 480px.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>*@
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="FirstName"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="LastName"></air-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="WorkTitle"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="Email" type="email" readonly></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="PhoneNumber"></air-input>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.IsActive)
+            <button class="btn float-right btn-primary">SAVE CHANGES</button>
+        </div>
+    </form>
+
+</div>

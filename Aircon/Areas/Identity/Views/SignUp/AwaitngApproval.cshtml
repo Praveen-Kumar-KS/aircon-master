@@ -1,0 +1,71 @@
+﻿@using Aircon.Areas.Identity.Models.SignUp
+@model UserDetailViewModel
+
+@{
+    ViewData["Title"] = "USER DETAILS";
+    Layout = "_OnboardingLayout";
+    ViewData["OnboardingImage"] = "/assets/onboarding/AwaitingApproal.png";
+}
+
+<div class="login-box-login">
+
+    <div class="col-md-12 pl-0 pr-0">
+        <h2>AWAITING APPROVAL</h2>
+        <h3 class="mt-20 font-normal">Hang Tight</h3>
+        <p class="mt-20 font-normal">
+            We’ve sent your details to your company admin for approval. Approval requests take
+            between 12 & 24 hours. If you do not hear back, contact 1 (800) 233 1322
+        </p>
+    </div>
+    <div class="col-md-12 pl-0 pr-0 pb-10">
+        <h3 class="font-normal">While you’re waiting…</h3>
+        <p class="mt-20 font-normal">Here are some tutorial videos to help you get started. </p>
+    </div>
+    <div class="col-md-12 pl-0 pr-0">
+        <figure class="teaser">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/bwj2s_5e12U" allowfullscreen></iframe>
+            </div>
+            <figcaption class="teaser-overlay">
+                <div class="teaser-meta">
+                    <span class="teaser-title">Intro to Aircon</span>
+                    <p class="teaser-description">Brief introduction to the Aircon Platform</p>
+                </div>
+                <div class="play-icon">
+                    <svg width="33.599" height="33.599" viewBox="0 0 33.599 33.599">
+                        <path id="ic_play_circle_filled_24px" d="M18.8,2A16.8,16.8,0,1,0,35.6,18.8,16.805,16.805,0,0,0,18.8,2Zm-3.36,24.359V11.24l10.08,7.56Z" transform="translate(-2 -2)" fill="#fff" />
+                    </svg>
+                </div>
+            </figcaption>
+        </figure>
+
+
+        <figure class="teaser ">
+            <img class="teaser-image" src="assets/images/teaser2.png" alt="Lilith, Hugo’s cat" />
+            <figcaption class="teaser-overlay">
+                <div class="teaser-meta">
+                    <span class="teaser-title">What is a consolidation?</span>
+                    <p class="teaser-description">Brief introduction to freight consolidation and how it works</p>
+                </div>
+                <div class="play-icon">
+                    <svg width="33.599" height="33.599" viewBox="0 0 33.599 33.599">
+                        <path id="ic_play_circle_filled_24px" d="M18.8,2A16.8,16.8,0,1,0,35.6,18.8,16.805,16.805,0,0,0,18.8,2Zm-3.36,24.359V11.24l10.08,7.56Z" transform="translate(-2 -2)" fill="#fff" />
+                    </svg>
+                </div>
+            </figcaption>
+        </figure>
+    </div>
+
+</div>
+
+@section PageScripts {
+    <environment names="Development,Staging,Production,Testing">
+        <script src="~/lib/video/responsible-video.js"></script>
+    </environment>
+    <script type="text/javascript">
+        $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function (e) {
+            $('body').hasClass('fullscreen-video') ? $('body').removeClass('fullscreen-video') : $('body').addClass('fullscreen-video')
+        });
+
+    </script>
+}

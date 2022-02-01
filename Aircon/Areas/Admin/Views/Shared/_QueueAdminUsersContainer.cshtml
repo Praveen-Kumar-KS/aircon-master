@@ -1,0 +1,63 @@
+﻿@using Aircon.Areas.Admin.Models
+@using Aircon.Models
+@using Aircon.Data.Security
+
+@model List<UserViewModel>
+@*Step 10*@
+<div class="p-0 mob-mt-40 card-body collapse show" id="collapseOne" style="max-height: 272px;overflow-y: auto;">
+    <div id="QueueUsers" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        @foreach (var item in Model)
+        {
+            <div class="table-card green">
+                <div class="row">
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <h5 class="subtitle1">@item.FirstName @item.LastName</h5>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">EMAIL</h6>
+                                <p class="text-muted mb-0">@item.Email</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">COMPANY NAME</h6>
+                                <p class="text-muted mb-0">@item.CompanyName</p>
+                                @Html.HiddenFor(x => item.CustomerId)
+
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">PHONE</h6>
+                                <p class="text-muted mb-0">@item.PhoneNumber</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">SIGNED UP</h6>
+                                <p class="text-muted mb-0">@(item.CreationDate.HasValue ? item.CreationDate.Value.ToString("dd MMM yyyy"): "")</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-7 col-sm-6 col-10">
+                        <span asp-authorize asp-permission="@PermissionSystemName.DenyAdminUser" class="adminqueueuserdeny float-right round-icon bclose" data-id="@item.Id"> <i class="mdi mdi-window-close" aria-hidden="true"></i></span>
+                        <span asp-authorize asp-permission="@PermissionSystemName.ApprovalAdminUser" class="adminqueueuserapprove float-right round-icon bconfirm" data-id="@item.Id">
+                            <i class="mdi mdi-check" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+<air-grid-action-confirmation asp-class-id="adminqueueuserdeny" asp-action-type="@GridActionConfirmType.DenyUser" asp-action="DenyUser" />
+<air-grid-action-confirmation asp-class-id="adminqueueuserapprove" asp-action-type="@GridActionConfirmType.ApproveUser" asp-action="ApproveUser" />

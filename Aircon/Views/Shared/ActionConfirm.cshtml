@@ -1,0 +1,45 @@
+﻿@using Aircon.Models
+@model ActionConfirmationModel
+
+@*<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="@(Model.WindowId)-title">Are you sure?</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            @if (!string.IsNullOrEmpty(Model.AdditonalConfirmText))
+            {
+                <div class="additional-text">
+                    Additional message
+                </div>
+            }
+            Confirm
+        </div>
+        <div class="modal-footer">
+            <button type="submit" id="@(Model.WindowId)-submit-button" class="btn btn-primary float-right">
+                Yes
+            </button>
+            <span class="btn btn-default float-right margin-r-5" data-dismiss="modal">Cancel</span>
+        </div>
+    </div>
+</div>*@
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="m-r-10 mdi txt-black mdi-close"></i>
+            </button>
+        </div>
+        <div class="col-md-9 center">
+            <h4 class="text-center m-t-10 bold">ACTIVATING USER</h4>
+            <p class="mt-20 pb-0 font-normal text-center txt-14">You are about to activate this user. They will be notified via email.</p>
+        </div>
+        <div class="center pb-30">
+            <button type="submit" id="@(Model.WindowId)-submit-button" class="btn  btn-primary">ACTIVATE</button>
+            <button data-dismiss="modal" class="btn btn-secondary">CANCEL</button>
+        </div>
+
+    </div>
+</div>

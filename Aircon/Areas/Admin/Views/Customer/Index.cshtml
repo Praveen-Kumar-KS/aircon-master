@@ -1,0 +1,68 @@
+﻿@using Aircon.Areas.Admin.Models.Customer
+@model CustomerAdminListViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Dashboard";
+    TempData["SearchText"] = "";
+    TempData["SearchController"] = "Customer";
+
+    var hideCustomerOpportunityQueue = await genericAttributeService.GetAttributeAsync<UserModel, bool>(HttpContextHelper.UserId.Value, CardGridSetting.AdminCustomer.HideCustomerOpportunityQueue, false);
+    var hideCustomers = await genericAttributeService.GetAttributeAsync<UserModel, bool>(HttpContextHelper.UserId.Value, CardGridSetting.AdminCustomer.HideCustomersQueue, false);
+    var recordCountCustomerOpportunityQueue = await genericAttributeService.GetAttributeAsync<UserModel, int>(HttpContextHelper.UserId.Value, CardGridSetting.AdminCustomer.CustomerOpportunityQueue, 5);
+    var recordCountCustomers = await genericAttributeService.GetAttributeAsync<UserModel, int>(HttpContextHelper.UserId.Value, CardGridSetting.AdminCustomer.Customers, 5);
+
+}
+
+
+<div class="col-md-12">
+    <div class="form__group m-b-30">
+
+        <air-grid-search asp-search-action="Index" asp-placeholder="Enter Company name email or company Id ">
+        </air-grid-search>
+    </div>
+</div>
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"> 
+        <div class="">
+            <div id="exTab3">
+                <ul class="nav nav-pills w-hidden">
+                    <li>
+                        <a href="#1b" data-toggle="tab" class="active show">
+                            <h6 class="card-header">Queue</h6>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <h6 class="card-header pl-0 pr-0"><span>|</span></h6>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#2b" data-toggle="tab">
+                            <h6 class="card-header">Customers</h6>
+                        </a>
+                    </li>
+                </ul>
+    
+                <hr class="mt-0 mdi-hidden m-b-40" />
+                <div class="tab-contents">
+                    <div class="tab-pane active" id="1b">
+                        <air-grid-card asp-name="Queue" asp-block-attribute-name="@CardGridSetting.AdminCustomer.CustomerOpportunityQueue" asp-container="QueueCustomersContainer" asp-hide="@hideCustomerOpportunityQueue" asp-hide-block-attribute-name="@CardGridSetting.AdminCustomer.HideCustomerOpportunityQueue" asp-show-record-count="@recordCountCustomerOpportunityQueue">
+                            <air-grid-card-filter asp-data-action="/Admin/Customer/CallbackScheduledQueueCustomers" asp-filter-display-name="@CustomerOpportunityStatus.CallbackScheduled.GetDescription()" asp-filter-name="@CustomerOpportunityStatus.CallbackScheduled.GetDescription()"></air-grid-card-filter>
+                            <air-grid-card-filter asp-data-action="/Admin/Customer/AbandonedQueueCustomers" asp-filter-display-name="@CustomerOpportunityStatus.Abandoned.GetDescription()" asp-filter-name="@CustomerOpportunityStatus.Abandoned.GetDescription()"></air-grid-card-filter>
+                            <air-grid-card-content>@await Html.PartialAsync("_QueueCustomersContainer", Model.CustomerOpportunities)</air-grid-card-content>
+                        </air-grid-card>
+                    </div>
+                    <div class="tab-pane" id="2b">
+                        <air-grid-card asp-name="Customers" asp-block-attribute-name="@CardGridSetting.AdminCustomer.Customers" asp-container="CustomerAdminContainer" asp-hide="@hideCustomers" asp-hide-block-attribute-name="@CardGridSetting.AdminCustomer.HideCustomersQueue" asp-show-record-count="@recordCountCustomers">
+                            <air-grid-card-filter asp-data-action="/Admin/Customer/AllCustomers" asp-filter-display-name="All" asp-filter-name="All"></air-grid-card-filter>
+                            <air-grid-card-filter asp-data-action="/Admin/Customer/ActiveCustomers" asp-filter-display-name="Active" asp-filter-name="Active"></air-grid-card-filter>
+                            <air-grid-card-filter asp-data-action="/Admin/Customer/InActiveCustomers" asp-filter-display-name="Inactive" asp-filter-name="Inactive"></air-grid-card-filter>
+                            <air-grid-card-content>@await Html.PartialAsync("_AdminCustomerContainer", Model.Customers)</air-grid-card-content>
+                        </air-grid-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

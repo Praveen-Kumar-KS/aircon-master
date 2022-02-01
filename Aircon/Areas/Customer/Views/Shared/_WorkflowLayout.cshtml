@@ -1,0 +1,55 @@
+﻿
+@using Aircon.Business.Services
+@using Aircon.Business.Helper
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["NavHeader"] = "Workflow";
+
+}
+
+
+@section Styles {
+    <link rel="stylesheet" href="/assets/libs/css/style.css">
+
+    @if (IsSectionDefined("PageStyles"))
+    {@RenderSection("PageStyles", required: false)}
+}
+
+
+<div class="dashboard-main-wrapper">
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <div class="dashboard-header">
+        <partial name="_Navigation" />
+
+    </div>
+
+
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+
+    <div class="">
+        <div class="dashboard-ecommerce">
+            <div class="container-fluid dashboard-content p-t-20">
+
+                <div class="ecommerce-widget">
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @if (IsSectionDefined("PageScripts"))
+        @RenderSection("PageScripts", required: false)
+
+}
+

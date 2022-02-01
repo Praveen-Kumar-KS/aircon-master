@@ -1,0 +1,46 @@
+﻿@using Aircon.Areas.Admin.Models.Customer
+<link href="~/assets/libs/css/style.css" rel="stylesheet" />
+
+@model CustomerAdminViewModel
+<div class="modal-header">
+    <h4 class="text-center m-t-10 bold">DELETE CUSTOMER</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <i class="m-r-10 mdi txt-black mdi-close"></i>
+    </button>
+</div>
+<form asp-action="DeleteCustomerProfile" asp-controller="Customer" method="post">
+    <div class="modal-body">
+        <div>
+            <input type="hidden" name="Id" id="Id" />
+            <p class="mt-20 pb-0 font-normal text-center txt-14">
+                You are going to remove @Model.CompanyName. Are you sure you want to delete this customer. This action cannot be undone.<br />
+                <br />
+                Please type <span style="background:#f2f2f2;">@Model.CompanyName</span> to proceed or close this modal to cancel.
+            </p>
+            <div class="form-group">
+                <input type="text" name="confirm_name_input" id="inputtxt" value="" class="form-control js-confirm-danger-input qa-confirm-input" onchange="Validate()" />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div>
+            <input type="hidden" name="CustomerId" value="@Model.CustomerId" />
+            <button type="submit" class="btn bg-change" id="dltCustomer" disabled>DELETE CONFIRM</button>
+            <button data-dismiss="modal" class="btn btn-secondary">CANCEL</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    function Validate() {
+        var companyName = '@Model.CompanyName';
+        var confirmCompanyName = document.getElementById("inputtxt").value;
+        if (companyName == confirmCompanyName)
+        {
+            document.getElementById('dltCustomer').removeAttribute("disabled");
+        }
+        else
+        {
+            document.getElementById('dltCustomer').setAttribute("disabled", "true");
+        }
+    }
+</script>

@@ -1,0 +1,179 @@
+﻿
+@using Aircon.Areas.Admin.Models.Customer
+
+@model CustomerAdminViewModel
+
+<div>
+    <form asp-controller="Customer" asp-action="SaveCustomerProfile" method="post" role="form">
+        <div class="modal-header green-top">
+            <h6 class=" subtitle1 p-0 bold">Customer Profile</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="m-r-10 mdi txt-black mdi-close"></i>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div class=" subtitle1 p-0 normal-font m-b-10">@Model.CompanyName</div>
+            <div class="user-card">
+                <div class="subtitle1 bold p-0">Details</div>
+                <div class="row">
+
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                        <figure class="figure m-t-10">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">COMPANY ID</h6>
+                                <p class="text-muted mb-0">@Model.DisplayCustomerId</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                        <figure class="figure m-t-10">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">ADMIN NAME</h6>
+                                <p class="text-muted mb-0">@Model.AdminName</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                        <figure class="figure m-t-10">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">EMAIL</h6>
+                                <p class="text-muted mb-0">@Model.AdminEmail</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                        <figure class="figure m-t-10">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">ACTIVE SINCE</h6>
+                                <p class="text-muted mb-0">@(Model.ApprovedDate.HasValue ? Model.ApprovedDate.Value.ToString("dd MMM yyyy"): "")</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <air-input asp-for="CompanyName"></air-input>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <air-input asp-for="AdminName"></air-input>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <air-input asp-for="AdminEmail"></air-input>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <air-input asp-for="Creditlimit"></air-input>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <div class="form__group  ">
+                        <div class="mdl-selectfield ">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select class="browser-default">
+                                <option value="" selcted>Active</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">Status</label>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <air-input asp-for="AdminPhoneNumber"></air-input>
+                </div>
+
+            </div>
+            @await Component.InvokeAsync("Note", new { entityId = Model.CustomerId, entityName = "CustomerNote" })
+            @*<div class="user-card m-t-20">
+                <div class="subtitle1 bold p-0">Conversations</div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <ul class="timeline">
+                            <li>
+
+                                <img class="img-timeline" src="assets/images/logo_air.png">
+
+                                <div class="col-md-12 m-t-20 timeline-content ">
+                                    <p class="upload font-normal"><span class="bold">Aircon</span>, Automated System</p>
+                                    <p class="upload dull-font">Approved user.</p>
+
+                                    <p class="datestamp">Yesterday at 11:23am</p>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <img class="img-timeline" src="assets/images/logo_per.png">
+
+                                <div class="col-md-12 m-t-20 timeline-content ">
+                                    <p class="upload font-normal"><span class="bold">Helen Baar</span>, Aircon Support</p>
+                                    <p class="upload dull-font">Rahul called, said he mis-spelled his name. Corrected it for him.</p>
+
+                                    <p class="datestamp">Today at 10:00am</p>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-t-20">
+                        <div class="form__group ">
+                            <div class="comment">
+                                <input type="email" id="email" class="form__field grey-bg" placeholder="Say Something…">
+                                <label for="email" class="form__label">Say Something…</label>
+                            </div>
+                        </div>
+                        <div class="commentbtn">
+                            <button class="btn float-right btn-primary m-t-10">LEAVE NOTE</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>*@
+
+
+        </div>
+
+        <div class="modal-footer">
+
+            @Html.HiddenFor(x => x.CustomerId)
+            @Html.HiddenFor(x => x.DisplayCustomerId)
+            @Html.HiddenFor(x => x.FranchiseParent)
+            @Html.HiddenFor(x => x.AlternateEmail)
+            @Html.HiddenFor(x => x.CreationDate)
+            @Html.HiddenFor(x => x.ApprovedDate)
+            @Html.HiddenFor(x => x.ActivatedDate)
+            @Html.HiddenFor(x => x.SignedUpDate)
+            @Html.HiddenFor(x => x.EinOrSsn)
+            @Html.HiddenFor(x => x.IATANumber)
+            @Html.HiddenFor(x => x.IsPaymentProcessed)
+            @Html.HiddenFor(x => x.IsSetupCompleted)
+            @Html.HiddenFor(x => x.IsSubscriptionExpired)
+            @Html.HiddenFor(x => x.IsTermsAccepted)
+            @Html.HiddenFor(x => x.SubscriptionExpiryDate)
+            @Html.HiddenFor(x => x.SubscriptionId)
+            @Html.HiddenFor(x => x.AddressId)
+            @Html.HiddenFor(x => x.SubscriptionId)
+            @Html.HiddenFor(x => x.IsActive)
+
+
+            <div class="col-md-12 pb-30">
+                <button class="btn float-right btn-primary" data-dismiss="modal">DISCARD CHANGES</button>
+                <button class="btn float-right btn-secondary">SAVE & CLOSE</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+

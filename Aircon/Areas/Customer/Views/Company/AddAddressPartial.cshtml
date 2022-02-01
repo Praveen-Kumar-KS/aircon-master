@@ -1,0 +1,64 @@
+﻿@using Aircon.Areas.Customer.Models.Contact
+
+@model CustomerAddressViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<div>
+    <form asp-controller="Company" asp-action="AddAddress" method="post" role="form">
+        <div class="modal-header green-top">
+            <h6 class=" subtitle1 p-0 bold">Add Address</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="m-r-10 mdi txt-black mdi-close"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class=" subtitle1 p-0 normal-font m-b-10">Address</div>
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <div class="form__group mb-20">
+                        <div class="mdl-selectfield m-b-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select class="browser-default" asp-for="AddressTypeId" asp-items="@ViewBag.AddressTypes">
+                                <option value="1">Shipping</option>
+                                <option value="2">Warehouse</option>
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">Type</label>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <air-input asp-for="Address.NickName"></air-input>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <air-input asp-for="Address.Line1"></air-input>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <air-input asp-for="Address.Line2"></air-input>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <air-input asp-for="Address.City"></air-input>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <air-input asp-for="Address.State"></air-input>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 m-t-20">
+                    <air-input asp-for="Address.Zip"></air-input>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="modal-footer">
+            <div class="col-md-12 pb-30">
+                @Html.HiddenFor(x => x.CustomerId)
+                @Html.HiddenFor(x => x.AddressId)
+                @Html.HiddenFor(x => x.AddressTypeId)
+                <button class="btn float-right btn-primary" data-dismiss="modal">DISCARD CHANGES</button>
+                <button class="btn float-right btn-secondary">SAVE & CLOSE</button>
+            </div>
+        </div>
+
+    </form>
+</div>

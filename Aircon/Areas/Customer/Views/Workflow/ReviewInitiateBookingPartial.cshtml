@@ -1,0 +1,195 @@
+﻿
+@using Aircon.Areas.Customer.Models.Quotes
+
+@model QuoteViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div>
+    <form asp-controller="Workflow" asp-action="ReviewInitiateBookingPartial" method="post">
+    <div class="modal-header green-top">
+        <h6 class=" subtitle1 p-0 bold">Review And Initiate Booking</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="m-r-10 mdi txt-black mdi-close"></i>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <div class=" subtitle1 p-0 normal-font m-b-10">
+            @Html.DisplayFor(Model => Model.CustomerName)
+        </div>
+        <div class=" subtitle1 p-0 normal-font m-b-10" style="font-weight: bold;">
+            @Html.DisplayFor(Model => Model.Route)
+        </div>
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <figure class="figure m-t-10">
+                    <figcaption class="figure-caption">
+                        <h6 class="figure-title">CUSTOMER ID</h6>
+                        @*<span class="text-muted mb-0">@Model.ShipmentType</span>*@
+                        @Html.DisplayFor(Model => Model.CustomerId)
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <figure class="figure m-t-10">
+                    <figcaption class="figure-caption">
+                        <h6 class="figure-title">QUOTE ID</h6>
+                        @*<p class="text-muted mb-0">@Model.ChargeableWeight</p>*@
+                        @Html.DisplayFor(Model => Model.Id)
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <figure class="figure m-t-10">
+                    <figcaption class="figure-caption">
+                        <h6 class="figure-title">CURRENT PRICE</h6>
+                        @*<p class="text-muted mb-0">@Model.ShipmentType</p>*@
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+        <div class="user-card">
+            <div class="subtitle1 bold p-0">Details</div>
+            <div class="row">
+
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <figure class="figure m-t-10">
+                        <figcaption class="figure-caption">
+                            <h6 class="figure-title">TYPE</h6>
+                            @*<p class="text-muted mb-0">@Model.ShipmentType</p>*@
+                            @Html.DisplayFor(Model => Model.ShipmentType)
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <figure class="figure m-t-10">
+                        <figcaption class="figure-caption">
+                            <h6 class="figure-title">CHARGEABLE WEIGHT</h6>
+                            @Html.DisplayFor(Model => Model.ChargeableWeight)
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <figure class="figure m-t-10">
+                        <figcaption class="figure-caption">
+                            <h6 class="figure-title">TYPE</h6>
+                            @*<p class="text-muted mb-0">@Model.ShipmentType</p>*@
+                            @Html.DisplayFor(Model => Model.ShipmentType)
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <figure class="figure m-t-10">
+                        <figcaption class="figure-caption">
+                            <h6 class="figure-title">CHARGEABLE WEIGHT</h6>
+                            @*<p class="text-muted mb-0">@Model.ChargeableWeight</p>*@
+                            @Html.DisplayFor(Model => Model.ChargeableWeight)
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <figure class="figure m-t-10">
+                        <figcaption class="figure-caption">
+                            <h6 class="figure-title">QUANTITY</h6>
+                            @*<p class="text-muted mb-0">@Model.Quantity</p>*@
+                            @Html.DisplayFor(Model => Model.Quantity)
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <figure class="figure m-t-10">
+                        <figcaption class="figure-caption">
+                            <h6 class="figure-title">SERVICE LEVEL</h6>
+                            @*<p class="text-muted mb-0">@Model.ServiceLevel</p>*@
+                            @Html.DisplayFor(Model => Model.ServiceLevel)
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <figure class="figure m-t-10">
+                        <figcaption class="figure-caption">
+                            <h6 class="figure-title">ARRIVES ON</h6>
+                            @*<p class="text-muted mb-0">@Model.ArrivesOn</p>*@
+                            @Html.DisplayFor(Model => Model.ArrivesOn)
+                        </figcaption>
+                    </figure>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="user-card m-t-20">
+            <div class="subtitle1 bold p-0">Conversations</div>
+
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <ul class="timeline">
+                        <li>
+
+                            <img class="img-timeline" src="assets/images/logo_air.png">
+
+                            <div class="col-md-12 m-t-20 timeline-content ">
+                                <p class="upload font-normal"><span class="bold">Helen Baar</span>, Associate</p>
+                                <p class="upload dull-font">Quote Created.</p>
+
+                                <p class="datestamp">Yesterday at 11:23am</p>
+                            </div>
+
+                        </li>
+                        <li>
+
+                            <img class="img-timeline" src="assets/images/logo_per.png">
+
+                            <div class="col-md-12 m-t-20 timeline-content ">
+                                <p class="upload font-normal"><span class="bold">Dylan Andreson</span>, Associate</p>
+                                <p class="upload dull-font">Customer called into say everything is great.</p>
+
+                                <p class="datestamp">Today at 10:00am</p>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-t-20">
+                    <div class="form__group ">
+                        <div class="comment">
+                            <input type="email" id="email" class="form__field grey-bg" placeholder="Say Something…">
+                            <label for="email" class="form__label">Say Something…</label>
+                        </div>
+                    </div>
+                    <div class="commentbtn">
+                        <button class="btn float-right btn-primary m-t-10">LEAVE NOTE</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="modal-footer">
+        <div class="col-md-12 pb-30">
+
+            @Html.HiddenFor(Model => Model.Id)
+            <button class="btn btn-primary">
+                <a asp-controller="Booking" asp-action="Index" asp-route-QuoteId="@Model.Id">BOOK</a>
+            </button>
+            @*<a href="/Areas/Customer/Booking/Index" class="btn float-right btn-primary" type="submit" data-id="@Model.Id" data-dismiss="modal">BOOK</a>*@
+            <button class="btn float-right btn-secondary" asp-controller="Quotes" asp-action="EditQuote" asp-route-Id="@Model.Id">EDIT & REQUOTE</button>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+
+

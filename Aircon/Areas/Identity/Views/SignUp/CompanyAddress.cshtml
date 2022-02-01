@@ -1,0 +1,85 @@
+﻿@model CustomerOpportunityAddressViewModel
+
+@{
+    ViewData["Title"] = "COMPANY DETAILS";
+    Layout = "_OnboardingLayout";
+    ViewData["OnboardingImage"] = "/assets/onboarding/Company.png";
+    ViewData["OnboardingBackAction"] = string.Empty;
+
+}
+
+<div class="login-box-login">
+
+    <div class="col-md-12 pl-0 pr-0 mb-20">
+        <h2>LET'S GET YOU SET UP</h2>
+        <h3 class="mt-20 font-normal">About Your Company</h3>
+    </div>
+
+    <div class="col-md-12 pl-0 pr-0 ">
+        <form asp-controller="SignUp" asp-action="CompanyAddressPost" method="post" role="form">
+            <div class="row">
+                <div class="col-md-12">
+                    @*<air-input asp-for="Line1"></air-input>*@
+                    <div class="form__group mb-20">
+                        <input asp-for="Line1" class="form__field" placeholder="Line 1" id="line1" type="text" autofocus>
+                        <label for="line1" class="form__label">@Html.DisplayNameFor(x => x.Line1)</label>
+                        <span asp-validation-for="Line1" class="errortxt"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <air-input asp-for="Line2"></air-input>
+                </div>
+                <div class="col-md-12">
+                    <air-input asp-for="City"></air-input>
+                </div>
+                <div class="col-md-6">
+                    <air-input asp-for="State"></air-input>
+                </div>
+                <div class="col-md-6">
+                    <air-input asp-for="Zip"></air-input>
+                </div>
+                <div class="col-md-12">
+                    @Html.EditorFor(x=> x.Logo)
+                    @*<div class="file_input_div ">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="file_input">
+                                    <label class="upload-text">
+                                        <i class="m-r-10 mdi mdi-upload"></i>
+                                        <input id="file_input_file" class="none" type="file" />
+                                    </label>
+                                </div>
+                                <div id="file_input_text_div" class="mdl-textfield mdl-js-textfield textfield-demo">
+                                    <input class="file_input_text mdl-textfield__input no-border" type="text" disabled readonly id="file_input_text" />
+                                    <label class="mdl-textfield__label" for="file_input_text"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-8 mt-20">
+                                <p class="upload font-bold">Upload new logo | Remove logo</p>
+                                <p class="upload font-normal">Photos help your customers recognize you.</p>
+                            </div>
+                        </div>
+                    </div>*@
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class=" col-md-7 mt-30">
+                    <div class="company-progress  progress mb-10">
+                        <div class="company-progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+
+                    </div>  <span class="text3">Sign-up process</span>
+                </div>
+                <div class="col-md-5 mt-30">
+                    @Html.HiddenFor(x => x.CustomerOpportunityId)
+                    @Html.HiddenFor(x => x.IsActive)
+                    @Html.HiddenFor(x => x.NickName)
+                    <button class="btn float-right btn-primary">Next</button>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

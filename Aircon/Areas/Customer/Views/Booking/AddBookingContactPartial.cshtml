@@ -1,0 +1,148 @@
+﻿@using Aircon.Areas.Customer.Models.Contact
+@using Aircon.Data.Security;
+
+@model CustomerContactListViewModel
+@{
+    ViewData["Title"] = "Contact Book";
+    TempData["SearchText"] = "";
+    TempData["SearchController"] = "Contact";
+}
+<div class="col-md-12">
+    <div class="form__group m-b-30">
+
+        <div class="modal-header">
+            <h6 class=" subtitle1 p-0 bold">Contact</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="m-r-10 mdi txt-black mdi-close"></i>
+            </button>
+        </div>
+        <div>
+            <air-grid-search asp-search-action="Index" asp-placeholder="Search for a contact">
+            </air-grid-search>
+        </div>
+    </div>
+</div>
+
+@{
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        @foreach (var items in Model.Contacts.GroupBy(x => x.Contact.FirstName.Substring(0, 1).ToUpper(), (alphabet, subList) => new { Alphabet = alphabet, SubList = subList.OrderBy(x => x.Contact.FirstName).ToList() }).OrderBy(x => x.Alphabet))
+        @*@for (int j = 0; j < Model.Contacts.GroupBy(x => x.Contact.FirstName.Substring(0, 1).ToUpper(), (alphabet, subList) => new { Alphabet = alphabet, SubList = subList.OrderBy(x => x.Contact.FirstName).ToList() }).OrderBy(x => x.Alphabet); j++)*@
+        {
+            <div class="">
+                <div id="exTab3">
+                    <ul class="nav nav-pills w-hidden">
+                        <li>
+                            <a href="#1b" data-toggle="tab" class="active show">
+                                <h6 class="card-header">A</h6>
+                            </a>
+                        </li>
+                    </ul>
+                    <hr class="mt-0 w-hidden mb-0" />
+                    <div class="tab-contents">
+                        <div class="tab-pane active" id="1b">
+                            <div class="card">
+                                <div class="row m-hidden">
+                                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12">
+                                        <h6 class="card-header bold">@items.Alphabet</h6>
+                                    </div>
+                                </div>
+                                <div id="CustomerContactContainer">
+                                    <div class="p-0 mob-mt-40 card-body collapse show">
+                                        <div id="CustomerContacts" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            @for (int i = 0; i < items.SubList.Count; i++)
+                                            {
+                                                @*<div class="table-card green">*@
+                                                <div class="row" id="test_" name="test" data-id="@items.SubList[i].ContactId" data-zip="@items.SubList[i].Contact.Zip"
+                                                     data-name="@items.SubList[i].Contact.NickName" data-line1="@items.SubList[i].Contact.Line1" data-line2="@items.SubList[i].Contact.Line2"
+                                                     data-city="@items.SubList[i].Contact.City" data-state="@items.SubList[i].Contact.State" data-companyName="@items.SubList[i].Contact.CompanyName" >
+                                                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12 col-12">
+                                                        <h5 class="subtitle1">@items.SubList[i].Contact.FirstName @items.SubList[i].Contact.LastName </h5>
+                                                    </div>
+                                                    <div id="test" class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                        <figure class="figure p-l-10 p-t-20">
+                                                            <figcaption class="figure-caption">
+                                                                <h6 class="figure-title">PHONE</h6>
+                                                                <p class="text-muted mb-0">@items.SubList[i].Contact.PhoneNumber</p>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                    <div id="test" class="col-xl-3 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                        <figure class="figure p-l-10 p-t-20">
+                                                            <figcaption class="figure-caption">
+                                                                <h6 class="figure-title">EMAIL</h6>
+                                                                <p class="text-muted mb-0">@items.SubList[i].Contact.Email</p>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                    <div id="test" class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                        <figure class="figure p-l-10 p-t-20">
+                                                            <figcaption class="figure-caption">
+                                                                <h6 class="figure-title">COMPANY NAME</h6>
+                                                                <p class="text-muted mb-0">@items.SubList[i].Contact.CompanyName</p>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                    <div id="test" class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                        <figure class="figure p-l-10 p-t-20">
+                                                            <figcaption class="figure-caption">
+                                                                <h6 class="figure-title">ADDRESS</h6>
+                                                                <p class="text-muted mb-0">
+                                                                    @items.SubList[i].Contact.NickName, @items.SubList[i].Contact.Line1, @items.SubList[i].Contact.Line2,
+                                                                    @items.SubList[i].Contact.City, @items.SubList[i].Contact.State, @items.SubList[i].Contact.Zip
+                                                                </p>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-4 col-md-7 col-sm-6 col-10">
+
+                                                    </div>
+                                                </div>
+                                                @*</div>*@
+
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+}
+
+<script>
+    @*var model = '@Html.Raw(Json.Serialize(Model.Contacts))';
+    var parseModel = JSON.parse(model);
+    for (i = 0; i  parseModel.length; i++) {*@
+        $('#test_').click(function (e) {
+            e.preventDefault();
+            $(this).addClass('selected').siblings().removeClass('selected');
+            var contactId = $(this).data('id');
+            var nickname = $(this).data('name');
+            var addressline1 = $(this).data('line1');
+            var addressline2 = $(this).data('line2');
+            var addresscity = $(this).data('city');
+            var addressstate = $(this).data('state');
+            var addresszip = $(this).data('zip');
+            //var company = $(this).data('companyName');
+            //alert(company);
+            @*$.get('@Url.Action("Index", "Booking")', { id: contactId}).done(function (res) {*@
+            document.getElementById("contactId").value = contactId;
+            document.getElementById("nickname").value = nickname;
+            document.getElementById("line1").value = addressline1;
+            document.getElementById("line2").value = addressline2;
+            document.getElementById("city").value = addresscity;
+            document.getElementById("state").value = addressstate;
+            //document.getElementById("companyName").value = company;
+            document.getElementById("zip").value = addresszip;
+            $contactBookingModalPopupModal.modal("hide");
+            });
+
+</script>
+
+
+
+

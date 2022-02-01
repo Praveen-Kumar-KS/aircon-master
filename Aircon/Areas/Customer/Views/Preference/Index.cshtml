@@ -1,0 +1,245 @@
+﻿@using Aircon.Areas.Customer.Models
+
+@model SystemSettingPageViewModel
+@{
+    Layout = "_CustomerSettingLayout";
+    ViewData["Title"] = "Preferences";
+}
+
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+    <form asp-controller="Preference" asp-action="SaveData" method="post" role="form">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card m-t-20">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Defaults</h6></div>
+                </div>
+                <div class="card-body p-t-0">
+                    <div class="row">
+                        <div class="col-xl-1 col-lg-1 col-md-2 col-sm-12 col-12 m-b-20">
+                            <div class="txt2 ">HOME</div>
+                            <input id="LandingPage_Workflow" type="radio" asp-for="@Model.UserPreferenceViewModel.LandingPage" value="@LandingPage.Workflow">
+                            <label for="LandingPage_Workflow">@LandingPage.Workflow</label>
+
+                            <input id="LandingPage_Metric" type="radio" asp-for="@Model.UserPreferenceViewModel.LandingPage" value="@LandingPage.Metric">
+                            <label for="LandingPage_Metric">@LandingPage.Metric</label>
+
+                        </div>
+                        <div class="col-xl-1 col-lg-1 col-md-2 col-sm-12 col-12 m-b-20">
+                            <div class="txt2 ">UNITS</div>
+                            <input id="MeasurementUnit_Metric" type="radio" asp-for="@Model.UserPreferenceViewModel.MeasurementUnit" value="@MeasurementUnit.Metric">
+                            <label for="MeasurementUnit_Metric">@MeasurementUnit.Metric</label>
+
+                            <input id="MeasurementUnit_Imperial" type="radio" asp-for="@Model.UserPreferenceViewModel.MeasurementUnit" value="@MeasurementUnit.Imperial">
+                            <label for="MeasurementUnit_Imperial">@MeasurementUnit.Imperial</label>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                            <div class="txt2 ">TIME ZONE</div>
+                            <div class=" form__group mb-20">
+                                <div class="mdl-selectfield m-b-20">
+                                    <i class="dropdown1 mdi mdi-menu-down"></i>
+                                    <select id="CountryId" asp-for="UserPreferenceViewModel.CountryId" asp-items="@ViewBag.CountryList" class="browser-default">
+                                    </select>
+                                </div>
+                                <label for="text" class="form__label">Country</label>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 m-b-20">
+                            <div class="txt2 m-hidden ">&nbsp;</div>
+                            <div class="  form__group mb-20">
+                                <div class="mdl-selectfield m-b-20">
+                                    <i class="dropdown1 mdi mdi-menu-down"></i>
+                                    <select id="WindowsTimeZoneId" asp-for="UserPreferenceViewModel.WindowsTimeZoneId" asp-items="@ViewBag.TimeZoneList" class="browser-default">
+                                    </select>
+                                </div>
+                                <label for="text" id="lblTimezone" class="form__label">United States</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card ">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Notifications</h6></div>
+                </div>
+                <div class="card-body p-t-0">
+                    <div class="row">
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 col-12 m-b-20">
+                            <div class="txt2 ">QUOTES EXPIRING</div>
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.QuotesExpiringDashboard" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Dashboard</label>
+                            </label>
+
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.QuotesExpiringEmail" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Email</label>
+                            </label>
+
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.QuotesExpiringText" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Text</label>
+                            </label>
+
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 col-12 m-b-20">
+                            <div class="txt2 ">BOOKING NEEDS ATTENTION</div>
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.BookingNeedsAttentionDashboard" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Dashboard</label>
+                            </label>
+
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.BookingNeedsAttentionEmail" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Email</label>
+                            </label>
+
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.BookingNeedsAttentionText" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Text</label>
+                            </label>
+
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 col-12 m-b-20">
+                            <div class="txt2 ">SHIPMENT NEEDS ATTENTION</div>
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.ShipmentNeedsAttentionDashboard" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Dashboard</label>
+                            </label>
+
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.ShipmentNeedsAttentionEmail" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Email</label>
+                            </label>
+
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.ShipmentNeedsAttentionText" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Text</label>
+                            </label>
+
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 col-12 m-b-20">
+                            <div class="txt2 ">SHIPMENT DELIVERED</div>
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.ShipmentDeliveredDashboard" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Dashboard</label>
+                            </label>
+
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.ShipmentDeliveredEmail" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Email</label>
+                            </label>
+
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.ShipmentDeliveredText" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Text</label>
+                            </label>
+
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 col-12 ">
+                            <div class="txt2 ">SHIPMENT DASHBOARD NOTIFICATIONS</div>
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.ShipmentDashboardNotificationBooked" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Booked</label>
+                            </label>
+
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.ShipmentDashboardNotificationPickupRequested" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Pickup Requested</label>
+                            </label>
+
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.ShipmentDashboardNotificationTenderedToAirline" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Tendered to Airline</label>
+                            </label>
+
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 col-12 m-b-20">
+                            <div class="txt2 m-hidden">&nbsp;</div>
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.ShipmentDashboardNotificationShipmentDeparted" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Shipment Departed</label>
+                            </label>
+
+
+                            <label class="switch">
+                                <input asp-for="UserUpdateNotificationSettingViewModel.ShipmentDashboardNotificationShipmentArrived" type="checkbox">
+                                <span class="slider round"></span>
+                                <label class="switch-txt">Shipment Arrived</label>
+                            </label>
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            @Html.HiddenFor(x => x.UserUpdateNotificationSettingViewModel.UserId)
+            @Html.HiddenFor(x => x.UserPreferenceViewModel.UserId)
+            @Html.HiddenFor(x => x.UserPreferenceViewModel.PreferenceId)
+
+            <button class="btn float-right btn-primary">SAVE CHANGES</button>
+        </div>
+    </form>
+
+</div>
+    @section PageScripts{
+        <script>
+            $(function () {
+                $("#CountryId").on("change", function () {
+                    var countryId = $(this).val();
+                    var countryText = $("#CountryId option:selected").text();
+                    $("#WindowsTimeZoneId").empty();
+                    $("#WindowsTimeZoneId").append("<option value=''>Select TimeZone</option>");
+                    $("#lblTimezone").text(countryText);
+                    $.getJSON(`/Customer/Preference/GetTimeZoneList?countryId=${countryId}`, (data) => {
+                        $.each(data, function (i, item) {
+                            $("#WindowsTimeZoneId").append(`<option value="${item.value}">${item.text}</option>`);
+                        });
+                    });
+                });
+            });
+        </script>
+    }

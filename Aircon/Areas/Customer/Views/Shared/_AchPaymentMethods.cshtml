@@ -1,0 +1,102 @@
+﻿@using Aircon.Areas.Customer.Models
+@using Aircon.Data.Entities
+
+@model List<PaymentMethodViewModel>
+
+<div class="card m-t-10">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                <div class="txt2 ">CHECKING 9874</div>
+                <div class="addmore">
+                    <ul class="add-content">
+                        <li><i class="mdi mdi-minus" aria-hidden="true"></i> </li>
+                        <li><i class="mdi mdi-plus" aria-hidden="true"></i></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                <div class="form__group mb-20">
+                    <div class="mdl-selectfield m-b-20">
+                        <i class="dropdown1 mdi mdi-menu-down"></i>
+                        <select class="browser-default">
+                            <option value="" selcted>ACH</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                    <label for="text" class="form__label">Type</label>
+                </div>
+
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+
+                <div class="form__group m-b-20">
+                    <div class="mdl-selectfield m-b-20">
+                        <i class="dropdown1 mdi mdi-menu-down"></i>
+                        <select class="browser-default">
+                            <option value="" selcted>Payments</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                    <label for="text" class="form__label">Default For</label>
+                </div>
+
+            </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                <div class="txt2 ">ACH DETAILS</div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                <div class="form__group m-b-20">
+                    <input type="email" id="email" class="form__field" placeholder="" value="45468898411325489874">
+                    <label for="email" class="form__label">Account Number</label>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12">
+                <div class="form__group m-b-20">
+                    <input type="email" id="email" class="form__field" placeholder="" value="66880880">
+                    <label for="email" class="form__label">Routing </label>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                <div class="form__group m-b-20">
+                    <input type="email" id="email" class="form__field" placeholder="" value="Rahul Nair">
+                    <label for="email" class="form__label">Name on Account</label>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                <div class="form__group m-b-20">
+                    <div class="mdl-selectfield m-b-20">
+                        <i class="dropdown1 mdi mdi-menu-down"></i>
+                        <select class="browser-default">
+                            <option value="" selcted>Checking</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                    <label for="text" class="form__label">Account Type</label>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                <div class="form__group m-b-20">
+                    <input type="email" id="email" class="form__field" placeholder="" value="45468898411325489874">
+                    <label for="email" class="form__label">Re-enter Account Number</label>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12">
+                <div class="form__group m-b-20">
+                    <input type="email" id="email" class="form__field" placeholder="" value="66880880">
+                    <label for="email" class="form__label">Re-enter Routing</label>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

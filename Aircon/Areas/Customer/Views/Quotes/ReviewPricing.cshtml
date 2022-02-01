@@ -1,0 +1,413 @@
+﻿@using Aircon.Areas.Customer.Models.Quotes
+
+@model QuotePricingViewModel
+@{
+    Layout = "_QuoteReviewLayout";
+    ViewData["Title"] = "QuotesReview";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <form asp-controller="Quotes" asp-action="SaveReviewQuote" asp-route-id ="@Model.QuoteId" method="post" role="form">
+
+        <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12">
+            <br />
+            <br />
+            <div class="row circle">
+                <div class="circle1">
+                    1
+                    <div class="row">
+                        <div class="quotes">
+                            <p>QUOTE</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dotted">.............</div>
+                <div class="circle2">
+                    2
+                    <div class="row">
+                        <div class="review">
+                            <p>REVIEW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <a href="/Customer/Quotes/AddQuote"><i class="fa fa-arrow-left" style="font-size:20px;color: black;"> RETURN TO QUOTE</i></a>
+            </div>
+            <br />
+            <br />
+            <div>
+                <button class="print" type="button" id="printquote" asp-controller="Quotes" asp-action="PrintQuote" data-id="@Model.QuoteId"><i class="fa fa-print"></i> Print</button>
+            </div>
+            <br />
+            <div>
+                <button class="edit" asp-controller="Quotes" asp-action="EditQuote" asp-route-Id="@Model.QuoteId"><i class="fa fa-edit"></i> Edit</button>
+            </div>
+            <br />
+            <div>
+                <button id="initiateBooking" data-id="@Model.QuoteId" class="play" type="button"><i class="fa fa-play"></i> Book</button>
+            </div>
+            <br />
+            <div>
+                <button class="save" type="submit" id="savequote" asp-route-id="@Model.QuoteId"><i class="fa fa-save"></i> Save</button>
+            </div>
+            <br />
+            <div>
+                <button class="send" type="button" id="emailquote" data-id="@Model.QuoteId"><i class="fa fa-envelope"></i> Send</button>
+            </div>
+
+            <br />
+            <div class="card m-t-20" style=" margin-top: -510px;">
+
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold"></h6></div>
+                </div>
+
+                <div class="card-body p-t-0">
+                    <h6 class="card-header bold">Review Pricing</h6>
+
+                    <div class="card-body p-0 mob-mt-40 collapse show" id="collapseTwo" style="max-height: 272px;overflow-y:auto;">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                            <div class="row">
+
+                                <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                                    <figure class="figure p-l-10 p-t-20">
+                                        <figcaption class="figure-caption">
+                                            <h6 class="figure-title">QUOTE ID</h6>
+                                            <p class="text-muted mb-0">@Model.QuoteId</p>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="row" style="margin-left: 500px; border: 2px solid #FFF6FF; border-radius: 12px; ">
+                                    <div class="additionaltermscolumn left" style="background-color: #ffdab9;">
+                                        <i class="fa fa-exclamation-circle" style="font-size: 30px; color: darkorange; margin:20px; margin-top:10px "></i>
+                                    </div>
+                                    <div class="additionaltermscolumn right" style="background-color: #FFF6FF; width: 300px">
+                                        <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                                            <figure class="figure p-l-10 p-t-20">
+                                                <figcaption class="figure-caption">
+                                                    <h6 class="figure-title">ADDITIONAL TERMS & CONDITIONS</h6>
+                                                    <p class="text-muted mb-0" style="font-size: 25px;">@Model.AddAdditionalTerms</p>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                    <air-input asp-for="Quotes.CustomerName" asp-required="true" readonly></air-input>
+                                </div>
+
+                                <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                                    <figure class="figure p-l-10 p-t-20">
+                                        <figcaption class="figure-caption">
+                                            <h6 class="figure-title"></h6>
+                                            <p class="text-muted mb-0 route">@Model.Quotes.Route</p>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                                    <figure class="figure p-l-10 p-t-20">
+                                        <figcaption class="figure-caption">
+                                            <h6 class="figure-title">TYPE</h6>
+                                            <p class="text-muted mb-0">@Model.Quotes.ShipmentType</p>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                    <figure class="figure p-l-10 p-t-20">
+                                        <figcaption class="figure-caption">
+                                            <h6 class="figure-title">CHARGEABLE WEIGHT</h6>
+                                            <p class="text-muted mb-0">@Model.Quotes.ChargeableWeight</p>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                                    <figure class="figure p-l-10 p-t-20">
+                                        <figcaption class="figure-caption">
+                                            <h6 class="figure-title">VOLUME</h6>
+                                            <p class="text-muted mb-0">@Model.Quotes.Volume</p>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                                    <figure class="figure p-l-10 p-t-20">
+                                        <figcaption class="figure-caption">
+                                            <h6 class="figure-title">QUANTITY</h6>
+                                            <p class="text-muted mb-0">@Model.Quotes.Quantity</p>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                                    <figure class="figure p-l-10 p-t-20">
+                                        <figcaption class="figure-caption">
+                                            <h6 class="figure-title">PICK UP ZIP</h6>
+                                            <p class="text-muted mb-0">@Model.Quotes.PickUpZipCode</p>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                                    <figure class="figure p-l-10 p-t-20">
+                                        <figcaption class="figure-caption">
+                                            <h6 class="figure-title">SERVICE LEVEL</h6>
+                                            <p class="text-muted mb-0">@Model.Quotes.ServiceLevel</p>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card ">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12">
+                                    <h6 class="card-header bold">DOOR TRUCKING</h6>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="row">
+                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                        <air-input asp-for="@Model.DoorTruckingCost" id="textInput1"></air-input>
+                                    </div>
+
+                                    <div class="middle">
+                                        <div class="slider-container">
+                                            <span class="bar"><span class="fill"></span></span>
+                                            <input type="range" id="slider" class="slider" min="0" max="100" value="0" asp-for="@Model.DoorTruckingMarkupPercent">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                        <air-input asp-for="@Model.DoorTrucingTotalCost" id="textInput1"></air-input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12">
+                                    <h6 class="card-header bold">AIR FRIEGHT</h6>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="row">
+                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                        <air-input asp-for="@Model.AirFreightCost" id="textInput2"></air-input>
+                                    </div>
+
+                                    <div class="middle">
+                                        <div class="slider-container">
+                                            <span class="bar"><span class="fill"></span></span>
+                                            <input type="range" id="slider" class="slider" min="0" max="100" value="1" asp-for="@Model.AirFreightMarkupPercent">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                        <air-input asp-for="@Model.AirFreightTotalCost" id="textInput2"></air-input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-2 col-sm-2 col-6 m-b-0"><h6 class="card-header bold">ADDITIONAL COST</h6></div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-2 col-sm-2 col-6 m-b-0"><h6 class="card-header bold">CHARGEABLE ITEM</h6></div>
+                        </div>
+                        <div class="additem">
+                            <button class="btn float-right btn-primary m-t-10" type="button" id="addchargeable">ADD ITEM</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.HiddenFor(Model => Model.QuoteId)
+    </form>
+</div>
+
+<div class="user-card m-t-20">
+    <div class="subtitle1 bold p-0">Conversations</div>
+    <div class="row">
+        <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12 ">
+            <ul class="timeline">
+                <li>
+                    <img class="img-timeline" src="assets/images/logo_air.png">
+                    <div class="col-md-12 m-t-20 timeline-content ">
+                        <p class="upload font-normal"><span class="bold">Aircon</span>, Automated System</p>
+                        <p class="upload dull-font">Approved user.</p>
+                        <p class="datestamp">Yesterday at 11:23am</p>
+                    </div>
+                </li>
+                <li>
+                    <img class="img-timeline" src="assets/images/logo_per.png">
+                    <div class="col-md-12 m-t-20 timeline-content ">
+                        <p class="upload font-normal"><span class="bold">Helen Baar</span>, Aircon Support</p>
+                        <p class="upload dull-font">Rahul called, said he mis-spelled his name. Corrected it for him.</p>
+                        <p class="datestamp">Today at 10:00am</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12 m-t-20">
+            <div class="form__group ">
+                <div class="comment">
+                    <input type="email" id="email" class="form__field grey-bg" placeholder="Say Something…">
+                    <label for="email" class="form__label">Say Something…</label>
+                </div>
+            </div>
+            <div class="commentbtn">
+                <button class="btn float-right btn-primary m-t-10">LEAVE NOTE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="saveQuoteModal"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 1100px!important;">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="addchargeableitem"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 1100px!important;">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="printQuoteModal"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 1100px!important;">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="emailQuoteModal"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 1100px!important;">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="printATAModal"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 1100px!important;">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" id="initiateBookingModal"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 1100px!important;">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="emailAtaQuoteModal"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 1100px!important;">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $("#savequote").click(function (e) {
+            e.preventDefault();
+            $.get('@Url.Action("SaveReviewQuote", "Quotes")', {}).done(function (res) {
+                $saveQuotePopupModal = $("#saveQuoteModal");
+                $saveQuotePopupModal.find("div.modal-content").html(res);
+                $saveQuotePopupModal.modal("show");
+            });
+    });
+
+    $("#addchargeable").click(function (e) {
+            e.preventDefault();
+            $.get('@Url.Action("AddChargeableCostPartial", "Quotes")', {}).done(function (res) {
+                $chargeableItemPopupModal = $("#addchargeableitem");
+                $chargeableItemPopupModal.find("div.modal-content").html(res);
+                $chargeableItemPopupModal.modal("show");
+            });
+    });
+
+     $("#printquote").click(function (e) {
+         e.preventDefault();
+         var Id = $(this).data('id');
+         $.get('@Url.Action("PrintQuote", "Quotes")', { id: Id}).done(function (res) {
+            $printPopupModal = $("#printQuoteModal");
+            $printPopupModal.find("div.modal-content").html(res);
+            $printPopupModal.modal("show");
+        });
+     });
+
+     $("#emailquote").click(function (e) {
+         e.preventDefault();
+         var Id = $(this).data('id');
+         $.get('@Url.Action("EmailQuote", "Quotes")', { id: Id}).done(function (res) {
+            $emailPopupModal = $("#emailQuoteModal");
+            $emailPopupModal.find("div.modal-content").html(res);
+            $emailPopupModal.modal("show");
+        });
+     });
+
+    $("#emailAtaQuote").click(function (e) {
+        e.preventDefault();
+        var Id = $(this).data('id');
+            $.get('@Url.Action("AtaEmailQuote", "Quotes")', {id : Id}).done(function (res) {
+                $AtaEmailPopupModal = $("#addchargeableitem");
+                $AtaEmailPopupModal.find("div.modal-content").html(res);
+                $AtaEmailPopupModal.modal("show");
+            });
+    });
+
+    var $slider = $("#slider");
+    var $fill = $(".bar .fill");
+
+    function setBar() {
+        $fill.css("width", $slider.val() + "%");
+    }
+    $slider.on("input", setBar);
+    setBar();
+
+    var slider = document.getElementById("slider");
+    var output = document.getElementById("value");
+    //output.innerHTML = slider.value;
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    }
+
+     $("#initiateBooking").click(function (e) {
+        e.preventDefault();
+        var Id = $(this).data('id');
+        $.get('@Url.Action("ReviewInitiateBookingPartial", "Workflow")', {Id :Id}).done(function (res) {
+               $initiateBookingPopupModal = $("#initiateBookingModal");
+               $initiateBookingPopupModal.find("div.modal-content").html(res);
+               $initiateBookingPopupModal.modal("show");
+           });
+       });
+</script>
+
+

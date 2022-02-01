@@ -1,0 +1,128 @@
+﻿@model PictureModel
+@using Aircon.Business.Media
+@using Aircon.Core
+@inject IAttachmentService pictureService
+
+
+@{
+    //register CSS and JS
+
+    //other variables
+    var random = CommonHelper.GenerateRandomInteger();
+    var clientId = "picture" + random;
+    var picture = await pictureService.GetStoredFileByIdAsync(Model.Id.HasValue ? Model.Id.Value: 0);
+    const int pictureSize = 100;
+    var removeText = "Remove image";
+    var uploadText = "Upload new image";
+    var infoLine1 = "Logos help your customers recognize you.";
+    var infoLine2 = "Use a png with a transparent background for best results. Minimum size 640px x 480px.";
+}
+
+<div class="file_input_div ">
+    <div class="row m-b-20">
+
+        <div id="@(clientId + "value")">
+            <input type="hidden" asp-for="@Model.Id" />
+        </div>
+
+        <div class="m-r-10 file-upload upload-picture-block">
+            <div class="picture-container">
+                <div id="@(clientId + "image")" class="uploaded-image">
+                    <img src="@(await pictureService.GetPictureUrlAsync(Model, pictureSize, true))" width="150" height="100" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-8 m-t-20">
+            <div class="row">
+                <div class="upload-button-container">
+                    @*fine uploader container*@
+                    <div id="@clientId" class="upload-image-button float-left px-md-1">
+                        <noscript>
+                            <p>Please enable JavaScript to use file uploader.</p>
+                        </noscript>
+                    </div>
+                </div>
+            </div>
+            @*<div class="row">
+                <p class="upload font-normal">Logos help your customers recognize you.</p>
+                <p class="upload dull-font">Use a png with a transparent background for best results. Minimum size 640px x 480px.</p>
+            </div>*@
+        </div>
+
+    </div>
+
+</div>
+@*fine uploader template (keep it synchronized to \Content\fineuploader\templates\default.html)*@
+<script type="text/template" id="@(clientId)-qq-template">
+    <div class="qq-uploader-selector qq-uploader">
+        <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+            <span>Drop files here to upload</span>
+        </div>
+        <div class="qq-upload-button-selector btn bg-gradient-green">
+            <div class="upload font-bold">@uploadText</div>
+        </div>
+        <div class="remove-image-button float-right px-md-1">
+            <div id="@(clientId + "remove")" class="btn bg-gradient-green upload font-bold">@removeText</div>
+        </div>
+        <span class="qq-drop-processing-selector qq-drop-processing">
+            <span>Processing dropped files...</span>
+            <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+        </span>
+        <ul class="qq-upload-list-selector qq-upload-list">
+            <li>
+                <div class="qq-progress-bar-container-selector">
+                    <div class="qq-progress-bar-selector qq-progress-bar"></div>
+                </div>
+                <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                <span class="qq-edit-filename-icon-selector qq-edit-filename-icon"></span>
+                <span class="qq-upload-file-selector qq-upload-file"></span>
+                <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+                <span class="qq-upload-size-selector qq-upload-size"></span>
+                <a class="qq-upload-cancel-selector qq-upload-cancel" href="#">Cancel</a>
+                <a class="qq-upload-retry-selector qq-upload-retry" href="#">Retry</a>
+                <a class="qq-upload-delete-selector qq-upload-delete" href="#">Delete</a>
+                <span class="qq-upload-status-text-selector qq-upload-status-text"></span>
+            </li>
+        </ul>
+        <ul class="info-upload-list">
+            <li>
+                <p class="upload font-normal">@infoLine1</p>
+            </li>
+            <li>
+                <p class="upload dull-font">@infoLine2</p>
+            </li>
+        </ul>
+    </div>
+</script>
+<script>
+    $(document).ready(function() {
+        $("#@(clientId)").fineUploader({
+            request: {
+                endpoint: '@(Url.Content("~/Customer/Image/AsyncUpload"))'
+            },
+            template: "@(clientId)-qq-template",
+            multiple: false,
+            validation: {
+                allowedExtensions: [ "bmp", "gif", "jpeg", "jpg", "jpe", "jfif", "pjpeg", "pjp", "png", "tiff", "tif", "webp"]
+            }
+        }).on("complete", function(event, id, name, responseJSON, xhr) {
+            if (responseJSON.success) {
+                $("#@(clientId + "image")").html("<img src='" + responseJSON.imageUrl + "' width='150' height='100' />");
+                $("#@(clientId + "value") input").val(responseJSON.pictureId);
+                $("#@(clientId + "remove")").show();
+            }
+        });
+        $("#@(clientId + "remove")").click(function(e) {
+            $("#@(clientId + "image")").html("<img src='@await pictureService.GetDefaultPictureUrlAsync(Model,pictureSize)' width='150' height='100' />");
+            $("#@(clientId + "value") input").val(0);
+            $("#@(clientId) .qq-upload-list-selector").empty();
+            $(this).hide();
+        });
+
+        if ($("#@(clientId + "value") input").val() === "") {
+            $("#@(clientId + "remove")").hide();
+        }
+    });
+</script>

@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Styles {
+    <link rel="stylesheet" href="/assets/libs/css/login.css">
+
+    @if (IsSectionDefined("PageStyles"))
+        {@RenderSection("PageStyles", required: false)}
+}
+
+<div class="dashboard-header w-hidden">
+    <nav class="navbar navbar-expand-lg bg-blue fixed-top">
+        <a class="navbar-brand" href="index.html">
+
+            <img src="assets/images/airconlogo.png" alt="">
+        </a>
+    </nav>
+</div>
+
+<div class="login-box">
+
+    <div class="login-box-quotebox">
+        <div class="quote-container">
+            <div class="slideshow-container">
+
+                <div class="mySlides ">
+                    <div class="quote fnt-whitecolor">
+                        <h4>Every year </h4>
+                        <h1>52 million </h1>
+                        <h4>metric tons of cargo is transported by air.</h4>
+                    </div>
+                </div>
+
+                <div class="mySlides ">
+                    <div class="quote">
+                        <h4>Step 2 </h4>
+                        <h1>52 million </h1>
+                        <h4>metric tons of cargo is transported by air.</h4>
+                    </div>
+                </div>
+
+                <div class="mySlides ">
+                    <div class="quote">
+                        <h4>Step 2  </h4>
+                        <h1>52 million </h1>
+                        <h4>metric tons of cargo is transported by air.</h4>
+                    </div>
+                </div>
+                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                <a class="next" onclick="plusSlides(1)">❯</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-box-formbox">
+        @RenderBody()
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="/assets/libs/js/loginSlide.js"></script>
+    @RenderSection("PageScripts", required: false)
+}

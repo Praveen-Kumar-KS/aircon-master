@@ -1,0 +1,114 @@
+﻿@using Aircon.Business.Models.Customer.Quotes
+
+@model List<QuoteModel>
+
+<div class="card-body p-0 mob-mt-40 collapse show" id="collapseTwo" style="max-height: 272px;overflow-y:auto;">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        @foreach (var item in Model)
+        {
+            <div class="table-card green">
+                <div class="row">
+                    <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <h5 class="subtitle1">@item.CustomerName</h5>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title"></h6>
+                                <p class="text-muted mb-0 route">@item.Route</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">TYPE</h6>
+                                <p class="text-muted mb-0">@item.ShipmentType</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">CHARGEABLE WEIGHT</h6>
+                                <p class="text-muted mb-0">@item.ChargeableWeight</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">VOLUME</h6>
+                                <p class="text-muted mb-0">@item.Volume</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">QUANTITY</h6>
+                                <p class="text-muted mb-0">@item.Quantity</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">SERVICE LEVEL</h6>
+                                <p class="text-muted mb-0">@item.ServiceLevel</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">ARRIVES ON</h6>
+                                <p class="text-muted mb-0">@item.ArrivesOn</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">QUOTE ID</h6>
+                                <p class="text-muted mb-0">@item.Id</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-7 col-sm-6 col-10">
+                        <a asp-controller="Quotes" asp-action="CloneQuote" asp-route-id="@item.Id"><span class="quoteclonebtn float-right round-icon" style="border-color: black;color: black;"><i class="mdi mdi-content-copy" aria-hidden="true"></i> </span></a>
+                        <a asp-controller="Quotes" asp-action="DeleteQuote" asp-route-id="@item.Id"><span class="quotedltbtn float-right round-icon bdelete"><i class="mdi mdi-delete" aria-hidden="true"></i> </span></a>
+                        <a asp-controller="Quotes" asp-action="EditQuote" asp-route-id ="@item.Id"><span class="quoteeditbtn float-right round-icon bedit"><i class="mdi mdi-pencil" aria-hidden="true"></i> </span></a>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-7 col-sm-6 col-10">
+                        <button id="initiateBooking" data-id="@item.Id" class="btn btn-primary bookbtn">BOOK</button>
+                    </div>
+                </div>
+            </div>
+        }
+
+        
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" id="initiateBookingModal"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 1100px!important;">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#initiateBooking").click(function (e) {
+        e.preventDefault();
+        var Id = $(this).data('id');
+        $.get('@Url.Action("ReviewInitiateBookingPartial", "Workflow")', {Id :Id}).done(function (res) {
+               $initiateBookingPopupModal = $("#initiateBookingModal");
+               $initiateBookingPopupModal.find("div.modal-content").html(res);
+               $initiateBookingPopupModal.modal("show");
+           });
+       });
+</script>
+
+

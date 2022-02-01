@@ -1,0 +1,150 @@
+﻿@using Aircon.Areas.Customer.Models
+
+
+@model List<PaymentMethodViewModel>
+@{
+    var paymentTypes = Enum.GetValues(typeof(PaymentType)).Cast<PaymentType>().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+
+    var paymentMethodDefaults = Enum.GetValues(typeof(PaymentMethodDefault)).Cast<PaymentMethodDefault>().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+
+    var accountTypes = Enum.GetValues(typeof(AccountType)).Cast<AccountType>().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+}
+@foreach (var item in Model)
+{
+    <div class="card m-t-10">
+        <div class="card-body">
+            <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                @if (item.PaymentType == PaymentType.CreditCard)
+                {
+                    <div class="txt2 ">CARD @item.CardNumber.Substring(item.CardNumber.Length - 4, 4)</div>
+
+                }
+                else if (item.PaymentType == PaymentType.ACH)
+                {
+                    <div class="txt2 ">CHECKING @item.AccountNumber.Substring(item.AccountNumber.Length - 4, 4)</div>
+
+                }
+                <div class="addmore">
+                    <ul class="add-content">
+                        <li><i data-id="@item.PaymentMethodId" class="company-paymentmethod-edit mdi mdi-pencil" aria-hidden="true"></i> </li>
+                        <li><i data-id="@item.PaymentMethodId" class="mdi mdi-delete" aria-hidden="true"></i></li>
+                    </ul>
+                </div>
+            </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                    <div class="form__group mb-20">
+                        <div class="mdl-selectfield m-b-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select disabled asp-for="@item.PaymentType" class="browser-default" asp-items="@paymentTypes">
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">Type</label>
+                    </div>
+
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+
+                    <div class="form__group m-b-20">
+                        <div class="mdl-selectfield m-b-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select disabled asp-for="@item.PaymentMethodDefault" class="browser-default" asp-items="paymentMethodDefaults">
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">Default For</label>
+                    </div>
+
+                </div>
+
+                @if (item.PaymentType == PaymentType.CreditCard)
+                {
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <div class="txt2 ">CARD DETAILS</div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.CardNumber" readonly></air-input>
+                    </div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-12 col-12">
+                        <air-input asp-for="@item.CardValidThrough" readonly></air-input>
+                    </div>
+                    <div class="col-xl-1 col-lg-2 col-md-3 col-sm-12 col-12">
+                        <air-input asp-for="@item.CardCvv" readonly></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.NameOnCard" readonly></air-input>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h4 class="txt2 ">BILLING ADDRESS</h4>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="mt-20">
+                            <label asp-for="@item.IsBillingAddressSameAsCompanyAddress" class="air-checkbox" style="display: inline-block;" readonly>
+                                Same as company address
+                                <input asp-for="@item.IsBillingAddressSameAsCompanyAddress"  readonly />
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.CompanyName" readonly></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.BillingAddress.Line1" readonly></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.BillingAddress.Line2" readonly></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.BillingAddress.City" readonly></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.BillingAddress.State" readonly></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.BillingAddress.Zip" readonly></air-input>
+                    </div>
+
+                }
+                else if (item.PaymentType == PaymentType.ACH)
+                {
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <div class="txt2 ">ACH DETAILS</div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.AccountNumber" readonly></air-input>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 col-12">
+                        <air-input asp-for="@item.Routing" readonly></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.NameOnAccount" readonly></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <div class="form__group m-b-20">
+                            <div class="mdl-selectfield m-b-20">
+                                <i class="dropdown1 mdi mdi-menu-down"></i>
+                                <select disabled class="browser-default" asp-for="@item.AccountType" asp-items="@accountTypes">
+                                </select>
+                            </div>
+                            <label for="text" class="form__label">Account Type</label>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+}
+

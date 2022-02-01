@@ -1,0 +1,187 @@
+﻿@model OpportunityPaymentMethodViewModel
+
+@{
+    ViewData["Title"] = "USER DETAILS";
+    Layout = "_OnboardingLayout";
+    ViewData["OnboardingImage"] = "/assets/onboarding/SetupPayments.png";
+    var paymentTypes = Enum.GetValues(typeof(PaymentType)).Cast<PaymentType>().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+
+    var paymentMethodDefaults = Enum.GetValues(typeof(PaymentMethodDefault)).Cast<PaymentMethodDefault>().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+
+    var accountTypes = Enum.GetValues(typeof(AccountType)).Cast<AccountType>().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+
+}
+
+<div class="login-box-login">
+    <div class="col-md-12 pl-0 pr-0 mb-20">
+        <h2>SET UP PAYMENTS</h2>
+        <h3 class="mt-20 font-normal">About You</h3>
+    </div>
+
+    <div class="col-md-12 pl-0 pr-0 ">
+        <form asp-controller="SignUp" asp-action="SetupPaymentMethodPost" method="post" role="form">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class=" form__group mb-20">
+                        <div class="mdl-selectfield m-b-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select id="PaymentType" asp-for="PaymentType" asp-items="@paymentTypes" class="browser-default">
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">@Html.LabelFor(x => x.PaymentType)</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class=" form__group mb-20">
+                        <div class="mdl-selectfield m-b-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select id="PaymentMethodDefault" asp-for="PaymentMethodDefault" asp-items="@paymentMethodDefaults" class="browser-default">
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">@Html.LabelFor(x => x.PaymentMethodDefault)</label>
+                    </div>
+                </div>
+
+                <div class="payment-card col-md-12">
+                    <div class="txt2 ">CARD DETAILS</div>
+                </div>
+
+                <div class="payment-card col-md-6">
+                    <air-input asp-for="CardNumber"></air-input>
+                </div>
+                <div class="payment-card col-md-4">
+                    <air-input asp-for="CardValidThrough"></air-input>
+                </div>
+                <div class="payment-card col-md-2">
+                    <air-input asp-for="CardCvv"></air-input>
+                </div>
+                <div class="payment-card col-md-12">
+                    <air-input asp-for="NameOnCard"></air-input>
+                </div>
+                <div class="payment-card col-md-12">
+                    <div class="mt-20">
+                        <label asp-for="IsBillingAddressSameAsCompanyAddress" class="air-checkbox" style="display: inline-block;">
+                            Same as company address
+                            <input asp-for="IsBillingAddressSameAsCompanyAddress" />
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                </div>
+                <div class="payment-card billing-address col-md-12">
+                    <div class="txt2 ">BILLING ADDRESS</div>
+                </div>
+
+                <div class="payment-card billing-address col-md-12">
+                    <air-input asp-for="CompanyName"></air-input>
+                </div>
+                <div class="payment-card billing-address col-md-6">
+                    <air-input asp-for="BillingAddress.Line1"></air-input>
+                </div>
+                <div class="payment-card billing-address col-md-6">
+                    <air-input asp-for="BillingAddress.Line2"></air-input>
+                </div>
+                <div class="payment-card billing-address col-md-4">
+                    <air-input asp-for="BillingAddress.City"></air-input>
+                </div>
+                <div class="payment-card billing-address col-md-4">
+                    <air-input asp-for="BillingAddress.State"></air-input>
+                </div>
+                <div class="payment-card billing-address col-md-4`">
+                    <air-input asp-for="BillingAddress.Zip"></air-input>
+                </div>
+                <div class="payment-ach col-md-5 mt-30">
+                    <div class="txt2 ">ACH DETAILS</div>
+                </div>
+                <div class="payment-ach col-md-12">
+                    <div class="form__group m-b-20">
+                        <div class="mdl-selectfield m-b-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select class="browser-default" asp-for="AccountType" asp-items="@accountTypes">
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">Account Type</label>
+                    </div>
+                </div>
+                <div class="payment-ach col-md-12">
+                    <air-input asp-for="NameOnAccount"></air-input>
+                </div>
+                <div class="payment-ach col-md-12">
+                    <air-input asp-for="AccountNumber"></air-input>
+                </div>
+                <div class="payment-ach col-md-12">
+                    <air-input asp-for="ConfirmAccountNumber"></air-input>
+                </div>
+                <div class="payment-ach col-md-12">
+                    <air-input asp-for="Routing"></air-input>
+                </div>
+                <div class="payment-ach col-md-12">
+                    <air-input asp-for="ConfirmRouting"></air-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-md-7 mt-30">
+                    <div class="company-progress  progress mb-10">
+                        <div class="company-progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+
+                    </div>  <span class="text3">Sign-up process</span>
+                </div>
+                <div class="col-md-5 mt-30">
+                    @Html.HiddenFor(x => x.CustomerOpportunityId)
+                    <button formnovalidate="formnovalidate" name="Action" value="Next" class="btn float-right btn-primary">Next</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        var paymentType = $("#PaymentType").val();
+        if (paymentType == 0) {
+            $('.payment-ach').hide();
+            $('.payment-card').show();
+        } else
+        {
+            $('.payment-card').hide();
+            $('.payment-ach').show();
+        }
+        var isBillingAddressSameAsCompanyAddress = $("#IsBillingAddressSameAsCompanyAddress").is(":checked");
+        if (isBillingAddressSameAsCompanyAddress) {
+            $('.billing-address').hide();
+        } else {
+            $('.billing-address').show();
+        }
+    });
+    $("#IsBillingAddressSameAsCompanyAddress").change(function () {
+        $(".billing-address").toggle();
+    });
+
+    $("#PaymentType").change(function () {
+        var paymentType = $("#PaymentType").val();
+        if (paymentType == 0) {
+            $('.payment-ach').hide();
+            $('.payment-card').show();
+        } else {
+            $('.payment-card').hide();
+            $('.payment-ach').show();
+        }
+    });
+
+</script>

@@ -1,0 +1,71 @@
+﻿@using Aircon.Areas.Customer.Models.Quotes
+@using Aircon
+
+@model QuotesBookingListViewModel
+@{
+    Layout = "_WorkflowLayout";
+    ViewData["Title"] = "Workflow";
+
+    var hideQuotesQueue = await genericAttributeService.GetAttributeAsync<UserModel, bool>(HttpContextHelper.UserId.Value, CardGridSetting.QuotesandBookings.HideQuotes, false);
+    var hideBookingsQueue = await genericAttributeService.GetAttributeAsync<UserModel, bool>(HttpContextHelper.UserId.Value, CardGridSetting.QuotesandBookings.HideBookings, false);
+    var recordCountQuotesQueue = await genericAttributeService.GetAttributeAsync<UserModel, int>(HttpContextHelper.UserId.Value, CardGridSetting.QuotesandBookings.Quotes, 5);
+    var recordCountBookingsQueue = await genericAttributeService.GetAttributeAsync<UserModel, int>(HttpContextHelper.UserId.Value, CardGridSetting.QuotesandBookings.Bookings, 5);
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="col-md-12">
+    <div class="form__group m-b-30 search-width">
+        <p style="margin-left: -346px; margin-bottom: -66px; font-size: 23px; "><a>Today  |  This Week | This Month</a></p><air-grid-search asp-search-action="Index" asp-placeholder="Enter Shipment ID, IATA Code, Shipment Type or Customer Name">
+        </air-grid-search>
+    </div>
+    <div class="addbtn">
+        <a asp-controller="Quotes" asp-action="AddQuote" class="btn btn-primary" style="background: #ef7309;">
+            <i class="fa fa-plus"></i> <span>New Quote</span>
+        </a>
+    </div>
+</div>
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="">
+        <div id="exTab3">
+            <ul class="nav nav-pills w-hidden">
+                <li>
+                    <a href="#1b" data-toggle="tab" class="active show">
+                        <h6 class="card-header">Quotes</h6>
+                    </a>
+                </li>
+                <li>
+
+                    <a>
+                        <h6 class="card-header pl-0 pr-0"><span>|</span></h6>
+                    </a>
+                </li>
+                <li>
+                    <a href="#2b" data-toggle="tab">
+                        <h6 class="card-header">Bookings</h6>
+                    </a>
+                </li>
+            </ul>
+            <hr class="mt-0 w-hidden mb-0" />
+            <div class="tab-contents">
+                <div class="tab-pane show active" id="1b">
+                    <air-grid-card asp-name="Quotes" asp-block-attribute-name="@CardGridSetting.QuotesandBookings.Quotes" asp-container="QuotesContainer" asp-hide="@hideQuotesQueue" asp-hide-block-attribute-name="@CardGridSetting.CustomerSettings.HideUserQueue" asp-show-record-count="@recordCountQuotesQueue">
+                        <air-grid-card-filter asp-data-action="/Customer/Workflow/InprogressQuotes" asp-filter-display-name="In progress" asp-filter-name="In progress"></air-grid-card-filter>
+                        <air-grid-card-filter asp-data-action="/Customer/Workflow/DraftsQuotes" asp-filter-display-name="Drafts" asp-filter-name="Drafts"></air-grid-card-filter>
+                        <air-grid-card-filter asp-data-action="/Customer/Workflow/ClosedQuotes" asp-filter-display-name="Closed" asp-filter-name="Closed"></air-grid-card-filter>
+                        <air-grid-card-content>@await Html.PartialAsync("QuotesContainer", Model.Quotes)</air-grid-card-content>
+                    </air-grid-card>
+                </div>
+                <div class="tab-pane" id="2b">
+                    <air-grid-card asp-name="Bookings" asp-block-attribute-name="@CardGridSetting.QuotesandBookings.Bookings" asp-container="CustomerUsersContainer" asp-hide="@hideBookingsQueue" asp-hide-block-attribute-name="@CardGridSetting.CustomerSettings.HideCustomersQueue" asp-show-record-count="@recordCountBookingsQueue">
+                        <air-grid-card-filter asp-data-action="/Customer/Workflow/PendingQueueBookings" asp-filter-display-name="Pending" asp-filter-name="Pending"></air-grid-card-filter>
+                        <air-grid-card-filter asp-data-action="/Customer/Workflow/RecentlyCancelledQueueBookings" asp-filter-display-name="Recently Cancelled" asp-filter-name="Recently Cancelled"></air-grid-card-filter>
+                        <air-grid-card-content>@await Html.PartialAsync("BookingContainer", Model.Bookings)</air-grid-card-content>
+                    </air-grid-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

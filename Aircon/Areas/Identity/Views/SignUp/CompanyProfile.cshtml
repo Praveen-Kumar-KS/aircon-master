@@ -1,0 +1,57 @@
+﻿@using Aircon.Areas.Identity.Models.SignUp
+@model SignUpCompanyProfileViewModel
+
+@{
+    ViewData["Title"] = "COMPANY DETAILS";
+    Layout = "_OnboardingLayout";
+    ViewData["OnboardingImage"] = "/assets/onboarding/Company.png";
+    ViewData["OnboardingBackAction"] = string.Empty;
+}
+
+<div class="login-box-login">
+
+    <div class="col-md-12 pl-0 pr-0 mb-20">
+        <h2>LET'S GET YOU SET UP</h2>
+        <h3 class="mt-20 font-normal">About Your Company</h3>
+    </div>
+
+    <div class="col-md-12 pl-0 pr-0 ">
+        <form asp-controller="SignUp" asp-action="NewCompanyProfilePost" method="post" role="form">
+            <div class="row">
+                <div class="col-md-12">
+                    <air-input asp-for="CompanyName"></air-input>
+                </div>
+                <div class="col-md-12">
+                    <air-input asp-for="FranchiseParent"></air-input>
+                </div>
+                <div class="col-md-12">
+                    <air-input asp-for="AdminEmail"></air-input>
+                </div>
+                <div class="col-md-12">
+                    <air-input asp-for="AlternateEmail"></air-input>
+                </div>
+                <div class="col-md-12">
+                    <air-input asp-for="IATANumber"></air-input>
+                </div>
+                <div class="col-md-12">
+                    <air-input asp-for="EinOrSsn"></air-input>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class=" col-md-7 mt-30">
+                    <div class="company-progress  progress mb-10">
+                        <div class="company-progress-bar w-75" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+
+                    </div>  <span class="text3">Sign-up process</span>
+                </div>
+                <div class="col-md-5 mt-30">
+                    @Html.HiddenFor(x=> x.Id)
+                    <button class="btn float-right btn-primary">Next</button>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

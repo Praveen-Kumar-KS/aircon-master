@@ -1,0 +1,100 @@
+﻿@using Aircon.Business.Models.SystemAdmin.Permission
+
+@model PermissionMappingModel
+@{
+    Layout = "_SystemAdminSettingLayout";
+    ViewData["Title"] = "Dashboard";
+}
+
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <form asp-controller="Permission" asp-action="SaveData" method="post">
+        <div class="content-header clearfix">
+            <h6 class="float-left">
+                Access control list
+            </h6>
+            <div class="float-right">
+                <button type="submit" name="save" class="btn btn-primary">
+                    <i class="far fa-save"></i>
+                    SAVE
+                </button>
+            </div>
+        </div>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="form-horizontal">
+                    <div class="cards-group">
+                        <div class="card card-default">
+                            <div class="card-body">
+                                @if (Model.AvailablePermissions.Count == 0)
+                                {
+                                    <text>No permissions defined</text>
+                                }
+                                else if (Model.AvailableRoles.Count == 0)
+                                {
+                                    <text>No customer roles available</text>
+                                }
+                                else
+                                {
+                                    <script>
+                                $(document).ready(function () {
+                                    @foreach (var cr in Model.AvailableRoles)
+                                    {
+                                        <text>
+                                    $('#selectall-@(cr.RoleId)').click(function () {
+                                        $('.allow_@(cr.RoleId)').attr('checked', $(this).is(':checked')).change();
+                                    });
+
+                                    </text>
+                                    }
+                                });
+                                    </script>
+                                    <div class="scroll-wrapper">
+                                        <table class="table table-hover table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">
+                                                        <strong>Permission name</strong>
+                                                    </th>
+                                                    @foreach (var cr in Model.AvailableRoles)
+                                                    {
+                                                        <th scope="col">
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" id="selectall-@(cr.RoleId)" />
+                                                                    <strong>@cr.Name</strong>
+                                                                </label>
+                                                            </div>
+                                                        </th>
+                                                    }
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var pr in Model.AvailablePermissions)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <span>@pr.Name</span>
+                                                        </td>
+                                                        @foreach (var cr in Model.AvailableRoles)
+                                                        {
+                                                            var allowed = Model.Allowed.ContainsKey(pr.SystemName) && Model.Allowed[pr.SystemName][cr.RoleId];
+                                                            <td>
+                                                                <input class="allow_@(cr.RoleId)" type="checkbox" value="@(pr.SystemName)" name="allow_@(cr.RoleId)" @(allowed ? " checked=checked" : null) />
+                                                            </td>
+                                                        }
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>

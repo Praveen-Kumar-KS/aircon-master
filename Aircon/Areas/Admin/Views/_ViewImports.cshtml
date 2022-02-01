@@ -1,0 +1,23 @@
+﻿@using Aircon
+@using Aircon.ViewModels.Shared
+@using Microsoft.AspNetCore.Identity
+@using Vg.Common.ToastNotify.Components
+@using Aircon.Extensions
+@using Aircon.Areas.Customer.Models.Company
+@using Aircon.Areas.Admin.Models.User
+@using Aircon.Data.Enums
+@using Aircon.Models
+@using Aircon.Business.Models.Shared
+@using Aircon.Data.Helper
+@using Aircon.Business.Services
+@using Aircon.Business.Services.Shared
+
+@inject ICommonService CommonService
+@inject IAdminCommonService AdminCommonService
+@inject IGenericAttributeService genericAttributeService
+
+
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@removeTagHelper Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Aircon  

@@ -1,0 +1,55 @@
+﻿@using Aircon.Areas.SystemAdmin.Models.Employee
+@using Aircon
+@using Aircon.Models
+@using Aircon.Business.Models.Shared
+@using Aircon.Data.Helper
+
+@model EmployeeUserListViewModel
+@{
+    Layout = "_SystemAdminSettingLayout";
+    ViewData["Title"] = "Dashboard";
+    TempData["SearchText"] = "";
+    TempData["SearchController"] = "Employee";
+
+    var hideSystemSettingEmployee = await genericAttributeService.GetAttributeAsync<UserModel, bool>(HttpContextHelper.UserId.Value, CardGridSetting.Employee.HideSystemSettingEmployee, false);
+    var recordCountEmployee = await genericAttributeService.GetAttributeAsync<UserModel, int>(HttpContextHelper.UserId.Value, CardGridSetting.Employee.SystemSettingEmployee, 5);
+
+}
+<div class="col-md-12">
+    <div class="form__group m-b-30">
+        <air-grid-search asp-search-action="Index" asp-placeholder="Enter Username, email or user ID">
+        </air-grid-search>
+        <div class="addbtn">
+            <button class="adminaddemployee btn float-right btn-primary"><i class="mdi mdi-plus w-hidden "></i><span class="m-hidden">ADD EMPLOYEE</span></button>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="">
+        <div id="exTab3">
+            <ul class="nav nav-pills w-hidden">
+                <li>
+                    <a href="#1b" data-toggle="tab" class="active show">
+                        <h6 class="card-header">Employee</h6>
+                    </a>
+                </li>
+            </ul>
+            <hr class="mt-0 w-hidden mb-0" />
+            <div class="tab-contents">
+                <div class="tab-pane show active" id="1b">
+                    <air-grid-card asp-name="Employee" asp-block-attribute-name="@CardGridSetting.Employee.SystemSettingEmployee" asp-container="EmployeesContainer" asp-hide="@hideSystemSettingEmployee" asp-hide-block-attribute-name="@CardGridSetting.Employee.HideSystemSettingEmployee" asp-show-record-count="@recordCountEmployee">
+                        <air-grid-card-filter asp-data-action="/SystemAdmin/Employee/AllEmployeeUsers" asp-filter-display-name="All" asp-filter-name="All"></air-grid-card-filter>
+                        <air-grid-card-filter asp-data-action="/SystemAdmin/Employee/ActiveEmployeeUsers" asp-filter-display-name="Active" asp-filter-name="Active"></air-grid-card-filter>
+                        <air-grid-card-filter asp-data-action="/SystemAdmin/Employee/InActiveEmployeeUsers" asp-filter-display-name="Inactive" asp-filter-name="Inactive"></air-grid-card-filter>
+                        <air-grid-card-content>@await Html.PartialAsync("_EmployeeUsersContainer", Model.Users)</air-grid-card-content>
+                    </air-grid-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<air-grid-edit asp-partial="/SystemAdmin/Employee/AddEmployeePartial" asp-class-id="adminaddemployee" />
+
+

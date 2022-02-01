@@ -1,0 +1,49 @@
+﻿
+@using Aircon.Areas.Customer.Models.Quotes
+<link href="~/assets/libs/css/style.css" rel="stylesheet" />
+
+@model QuotePricingViewModel
+
+    <form asp-controller="Quotes" asp-action="PrintPDFQuote">
+        <div class="modal-header">
+            <h4 class="text-center m-t-10 bold">PRINT QUOTE</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="m-r-10 mdi txt-black mdi-close"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div>
+                <input type="hidden" name="Id" id="Id" />
+                <p class="mt-20 pb-0 font-normal text-center txt-14">
+                    Select a type of quote print.<br />
+                    <br />
+                </p>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div>
+                <button data-dismiss="modal" type="submit" class="btn btn-secondary">OFFICE COPY</button>
+                <button data-dismiss="modal" id="printquote" type="submit" class="btn btn-secondary" asp-controller="Quotes" asp-action="PrintPDFQuote">CUSTOMER COPY</button>
+            </div>
+        </div>
+        </form>
+
+        <div class="modal fade" tabindex="-1" id="printQuoteModal"
+             data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog" style="max-width: 1100px!important;">
+                <div class="modal-content">
+
+                </div>
+            </div>
+        </div>
+<script>
+    $("#printquote").click(function (e) {
+            e.preventDefault();
+        $.get('@Url.Action("PrintPDFQuote", "Quotes")', {}).done(function (res) {
+                $saveQuotePopupModal = $("#printQuoteModal");
+                $saveQuotePopupModal.find("div.modal-content").html(res);
+                $saveQuotePopupModal.modal("show");
+            });
+    });
+</script>

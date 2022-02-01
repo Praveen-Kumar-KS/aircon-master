@@ -1,0 +1,71 @@
+﻿
+@using Aircon.Business.Services
+@using Aircon.Business.Helper
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["NavHeader"] = "Aircon System Settings";
+}
+
+
+@section Styles {
+    <link rel="stylesheet" href="/assets/libs/css/style.css">
+
+    @if (IsSectionDefined("PageStyles"))
+    {@RenderSection("PageStyles", required: false)}
+}
+
+
+<div class="dashboard-main-wrapper">
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <div class="dashboard-header">
+        <partial name="_Navigation" />
+
+    </div>
+
+
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+
+    <div class="">
+        <div class="dashboard-ecommerce">
+            <div class="container-fluid dashboard-content p-t-20">
+
+                <div class="ecommerce-widget">
+                    <div class="m-scroll">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h3 class="m-scroll">
+                                    <a asp-action="Index" asp-controller="Employee" asp-area="SystemAdmin"><span class="txt1 @Html.IsSelected(action: "Index" , controller: "Employee", area: "SystemAdmin")">Employee </span></a>
+                                    <span class="pr-16 pl-16 tab2 ">|</span>
+                                    <a asp-action="Index" asp-controller="Permission" asp-area="SystemAdmin"><span class="txt1 @Html.IsSelected(action: "Index" , controller: "Permission", area: "SystemAdmin")">Permission</span></a>
+                                    @*<span class="pr-16 pl-16 tab2 ">|</span>
+                                    <a asp-action="Index" asp-controller="Preference" asp-area="SystemAdmin"><span class="txt1 @Html.IsSelected(action: "Index" , controller: "Preference", area: "SystemAdmin")">Preferences </span></a>
+                                    <span class="pr-16 pl-16 tab2 ">|</span>
+                                    <a asp-action="Index" asp-controller="Profile" asp-area="SystemAdmin"><span class="txt1 @Html.IsSelected(action: "Index" , controller: "Profile", area: "SystemAdmin")">Profile</span></a>
+                                    <span class="pr-16 pl-16 tab2 ">|</span>
+                                    <a asp-action="Index" asp-controller="Contact" asp-area="SystemAdmin"><span class="txt1 @Html.IsSelected(action: "Index" , controller: "Contact", area: "SystemAdmin") ">Contact Book</span></a>*@
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @if (IsSectionDefined("PageScripts"))
+        @RenderSection("PageScripts", required: false)
+
+}
+

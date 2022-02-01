@@ -1,0 +1,60 @@
+﻿@model NoteEntityViewModel
+
+
+<div class="page">
+    <div id="notes-view" data-url="@Url.Action("TabGrid", Model.EntityName,  new { area = "", id = Model.EntityId })"></div>
+    <div id="notes-add"  data-url="@Url.Action("AddNote", Model.EntityName,  new { area = ""})"></div>
+</div>
+<div class="user-card m-t-20">
+    <div class="subtitle1 bold p-0">Conversations</div>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+            <ul id="notes-data" class="timeline">
+            </ul>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 m-t-20">
+            <div class="form__group ">
+                <div class="comment">
+                    <input asp-for="Text" type="text" id="Text" class="form__field grey-bg" placeholder="Say Something…">
+                    <label for="Text" class="form__label">Say Something…</label>
+                </div>
+            </div>
+            <div class="commentbtn">
+                @Html.HiddenFor(x => x.EntityId)
+                <button  type="button" class="btnNoteSave btn float-right btn-primary m-t-10">LEAVE NOTE</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        (function () {
+            var url = $("#notes-view").data("url");
+            $("#notes-data").load(url);
+        })();
+        $(document).on('click', '.btnNoteSave', function () {
+            var url = $("#notes-add").data("url");
+            var text = $("#Text").val();
+            var entityId = $("#EntityId").val();
+            var data = { "text": text, "entityId": entityId };
+
+            console.log(text);
+            console.log(url);
+            console.log(entityId);
+            $.ajax({
+                url: url,
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (passParams) {
+                    console.log("Error is " + passParams);
+                }
+            });
+        });
+    });
+</script>

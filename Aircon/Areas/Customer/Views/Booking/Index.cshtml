@@ -1,0 +1,614 @@
+﻿@using Aircon.Areas.Customer.Models.Bookings
+
+@model BookingViewModel
+@{
+    Layout = "_CustomerLayout";
+    ViewData["Title"] = "Booking";
+
+
+    var bookingDocTypes = Enum.GetValues(typeof(BookingDocumentType)).Cast<BookingDocumentType>
+    ().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" rel="stylesheet" />
+</head>
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <form asp-controller="Booking" asp-action="Index" method="post">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <i class="fa fa-arrow-left" aria-hidden="true"> RETURN TO DASHBOARD</i>
+        </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card m-t-20">
+                @*<div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Defaults</h6></div>
+                </div>*@
+                <div class="card-body p-t-0">
+                    <div class="row">
+                        <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12 col-12">
+                            <h5 class="subtitle1">@Html.DisplayFor(Model => Model.CustomerName)</h5>
+                        </div>
+                        <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                            <figure class="figure p-l-10 p-t-20">
+                                <figcaption class="figure-caption">
+                                    <h6 class="figure-title"></h6>
+                                    <p class="text-muted mb-0 route">@Html.DisplayFor(Model => Model.Route)</p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                            <figure class="figure p-l-10 p-t-20">
+                                <figcaption class="figure-caption">
+                                    <h6 class="figure-title">TYPE</h6>
+                                    @Html.DisplayFor(Model => Model.ShipmentType)
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                            <figure class="figure p-l-10 p-t-20">
+                                <figcaption class="figure-caption">
+                                    <h6 class="figure-title">CHARGEABLE WEIGHT</h6>
+                                    @Html.DisplayFor(Model => Model.ChargeableWeight)
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                            <figure class="figure p-l-10 p-t-20">
+                                <figcaption class="figure-caption">
+                                    <h6 class="figure-title">VOLUME</h6>
+                                    @Html.DisplayFor(Model => Model.Volume)
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                            <figure class="figure p-l-10 p-t-20">
+                                <figcaption class="figure-caption">
+                                    <h6 class="figure-title">QUANTITY</h6>
+                                    @Html.DisplayFor(Model => Model.Quantity)
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                            <figure class="figure p-l-10 p-t-20">
+                                <figcaption class="figure-caption">
+                                    <h6 class="figure-title">SERVICE SPEED</h6>
+                                    @Html.DisplayFor(Model => Model.ServiceLevel)
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                            <figure class="figure p-l-10 p-t-20">
+                                <figcaption class="figure-caption">
+                                    <h6 class="figure-title">ARRIVES ON</h6>
+                                    @Html.DisplayFor(Model => Model.ArrivesOn)
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                            <figure class="figure p-l-10 p-t-20">
+                                <figcaption class="figure-caption">
+                                    <h6 id="quoteId" class="figure-title">QUOTE ID</h6>
+                                    @Html.DisplayFor(Model => Model.QuoteId)
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card m-t-20">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Addresses</h6></div>
+                </div>
+                <div class="card-body p-t-0">
+                    <div class="txt2 ">SHIPPER/EXPORTER</div>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <button id="bookingContact" data-id="@Model.QuoteId" class="btn float-left btn-secondary">ADD FROM ADDRESS BOOK</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.InternalReferenceNum"></air-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input id="addressline1" name="addressline1" asp-for="@Model.AddressLine1"></air-input>
+                        </div>
+                        <div class=" col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input id="addressline2" name="addressline2" asp-for="@Model.AddressLine2"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input id="addresscity" name="addresscity" asp-for="@Model.City"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input id="addressstate" name="addressstate" asp-for="@Model.State"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input id="addresszip" name="addresszip" asp-for="@Model.Zip"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.Country"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.Contact"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input id="company" name="company" asp-for="@Model.CompanyName"></air-input>
+                        </div>
+                        <div class="col-md-12">
+                            <air-input asp-for="@Model.SpecialInstruction"></air-input>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-t-0">
+                    <div class="txt2 ">CONSIGNEE/IMPORTER</div>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <button id="consigneeContact" data-id="@Model.QuoteId" class="btn float-left btn-secondary">ADD FROM ADDRESS BOOK</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input id="addressline1" name="addressline1" asp-for="@Model.AddressLine1"></air-input>
+                        </div>
+                        <div class=" col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input id="addressline2" name="addressline2" asp-for="@Model.AddressLine2"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input id="addresscity" name="addresscity" asp-for="@Model.City"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input id="addressstate" name="addressstate" asp-for="@Model.State"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input id="addresszip" name="addresszip" asp-for="@Model.Zip"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.Country"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.Contact"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input id="company" name="company" asp-for="@Model.CompanyName"></air-input>
+                        </div>
+                        <div class="col-md-12">
+                            <air-input asp-for="@Model.SpecialInstruction"></air-input>
+                        </div>
+                    </div>
+                </div>
+                @if (@Model.ShipmentType == ShipmentType.AirportToAirport)
+                {
+                <div class="card-body p-t-0">
+                    <div class="txt2 ">DROP OFF</div>
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.AddressLine1"></air-input>
+                        </div>
+                        <div class=" col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.AddressLine2"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.City"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.State"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.Zip"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.Country"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.Contact"></air-input>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <air-input asp-for="@Model.CompanyName"></air-input>
+                        </div>
+                        <div class="col-md-12">
+                            <air-input asp-for="@Model.SpecialInstruction"></air-input>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+                
+        @if (@Model.ShipmentType == ShipmentType.DoorToAirport)
+        {
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card m-t-20">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">PICK UP</h6></div>
+                    </div>
+                    <div class="card-body p-t-0">
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12" div>
+                                <div class="mt-10">
+                                    <label asp-for="@Model.IsPick" class="air-checkbox" style="display: inline-block;">
+                                         Pickup address is the same as shipper address
+                                        <input name="type" asp-for="IsPick"  onclick="pickUpCheckboxChange()"/>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <button id="pickUpContact" data-id="@Model.QuoteId" class="btn float-left btn-secondary">ADD FROM ADDRESS BOOK</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                <air-input id="addressline1" name="addressline1" asp-for="@Model.AddressLine1"></air-input>
+                            </div>
+                            <div class=" col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                <air-input id="addressline2" name="addressline2" asp-for="@Model.AddressLine2"></air-input>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                <air-input id="addresscity" name="addresscity" asp-for="@Model.City"></air-input>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                <air-input id="addressstate" name="addressstate" asp-for="@Model.State"></air-input>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                <air-input id="addresszip" name="addresszip" asp-for="@Model.Zip"></air-input>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                <air-input asp-for="@Model.Country"></air-input>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                <air-input asp-for="@Model.Contact"></air-input>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                                <air-input id="company" name="company" asp-for="@Model.CompanyName"></air-input>
+                            </div>
+                            <div class="col-md-12">
+                                <air-input asp-for="@Model.SpecialInstruction"></air-input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card m-t-20">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Cargo Availability</h6></div>
+                </div>
+                <div class="card-body p-t-0">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 m-t-20">
+                            <air-input asp-for="@Model.DropOffDateAndTime"></air-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card ">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-4 col-sm-12 col-12">
+                        <h6 class="card-header bold">Notifications</h6>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12">
+                        <button type="button" class="company-address-add btn float-right btn-secondary" data-id="0"><i class="mdi mdi-magnify w-hidden"></i><span class="m-hidden">ADD NOTIFICATION</span></button>
+                    </div>
+                </div>
+                <partial name="_BookingNotifications" for="BookingNotifications">
+
+            </div>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card m-t-20">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Documentation</h6></div>
+                </div>
+                <div class="card-body p-t-0">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 m-t-20">
+                            <air-input asp-for="@Model.InternalReferenceNum"></air-input>
+                        </div>
+                    </div>
+                    <div class="txt2 ">Upload Documents</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="file_input_div ">
+                                <div class="row m-b-20">
+                                    <div class="file-upload">
+                                        <div class="file_input">
+                                            <label class="upload-text">
+                                                <i class="m-r-10 mdi mdi-upload"></i>
+                                                <input id="file_input_file" class="none" type="file" />
+                                            </label>
+                                        </div>
+                                        <div id="file_input_text_div" class="mdl-textfield mdl-js-textfield textfield-demo">
+                                            <input class="file_input_text mdl-textfield__input no-border" type="text" disabled readonly id="file_input_text" />
+                                            <label class="mdl-textfield__label" for="file_input_text"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 m-t-20">
+                                        <div class=" form__group mb-20">
+                                            <div class="mdl-selectfield m-b-20">
+                                                <i class="dropdown1 mdi mdi-menu-down"></i>
+                                                <select disabled id="PaymentType" asp-for="BookingDocumentType" asp-items="@bookingDocTypes" class="browser-default">
+                                                </select>
+                                            </div>
+                                            <label for="text" class="form__label">@Html.LabelFor(x => x.BookingDocumentType)</label>
+                                        </div>
+                                        @Html.HiddenFor(x => x.BookingDocumentType)
+                                        <div class="container">
+                                            <a href="#"><img src="https://placekitten.com/300/300"></a>
+                                            <br />
+                                            <a href="dog.png" download="new-filename">
+                                                <i class="fa fa-trash" style="margin-left:285px"></i>
+                                                <i class="fa fa-download" style="margin-left:270px"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (@Model.QuoteType == QuoteType.QuoteByVolume)
+        {
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card m-t-20">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Shipment Information</h6></div>
+                    </div>
+                    <div class="card-body p-t-0">
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 m-t-20">
+                                <air-input asp-for="@Model.Quantity"></air-input>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 m-t-20">
+                                <air-input asp-for="@Model.ChargeableWeight"></air-input>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 m-t-20">
+                                <air-input asp-for="@Model.Volume"></air-input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card m-t-20">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Shipment Details</h6></div>
+                    </div>
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_field_outer">
+                        <div class="card form_field_outer_row ">
+                            <div class="row ">
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6 m-b-0"><h6 class="card-header bold">ITEM</h6></div>
+                            </div>
+
+                            @for (var i = 0; i < Model.ShipmentInformationDetails.Count; i++)
+                            {
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="row" style="margin-top:-26px">
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 ">
+                                            <air-input asp-for="@Model.ShipmentInformationDetails[i].Quantity" itemid="quantity"></air-input>
+                                        </div>
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 ">
+                                            <air-input asp-for="@Model.ShipmentInformationDetails[i].Length" itemid="length"></air-input>
+                                        </div>
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 ">
+                                            <air-input asp-for="@Model.ShipmentInformationDetails[i].Width" itemid="width"></air-input>
+                                        </div>
+                                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 ">
+                                            <air-input asp-for="@Model.ShipmentInformationDetails[i].Weight" itemid="weight"></air-input>
+                                        </div>
+                                        <div class="col-xl-2 col-lg-3 col-md-2 col-sm-12 col-12 ">
+                                            <air-input asp-for="@Model.ShipmentInformationDetails[i].Height" itemid="height"></air-input>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card m-t-20">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Projected Route Map</h6></div>
+                </div>
+                <div class="card-body p-t-0">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <ul class="timeline">
+                                <li>
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    <div class="col-md-12 m-t-20 timeline-content ">
+                                        <p class="upload font-normal">Helen Ba</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    <div class="col-md-12 m-t-20 timeline-content ">
+                                        <p class="upload font-normal">Helen Ba</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    <div class="col-md-12 m-t-20 timeline-content ">
+                                        <p class="upload font-normal">Helen Ba</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    <div class="col-md-12 m-t-20 timeline-content ">
+                                        <p class="upload font-normal">Helen Ba</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 pb-30">
+            @Html.HiddenFor(Model => Model.QuoteId)
+            @Html.HiddenFor(Model => Model.CustomerId)
+            @Html.HiddenFor(Model => Model.AddressLine1)
+            @Html.HiddenFor(Model => Model.AddressLine2)
+            @Html.HiddenFor(Model => Model.City)
+            @Html.HiddenFor(Model => Model.State)
+            @Html.HiddenFor(Model => Model.CompanyName)
+            @Html.HiddenFor(Model => Model.Zip)
+
+
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card m-t-20">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Conversations</h6></div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <ul class="timeline">
+                            <li>
+                                <img class="fa fa-arrow-left img-timeline">
+
+                                <div class="col-md-12 m-t-20 timeline-content ">
+                                    <p class="upload font-normal"><span class="bold">Helen Baar</span>, Associate</p>
+                                    <p class="upload dull-font">Quote Created.</p>
+
+                                    <p class="datestamp">Yesterday at 11:23am</p>
+                                </div>
+                            </li>
+                            <li>
+                                <img class="img-timeline">
+                                <div class="col-md-12 m-t-20 timeline-content ">
+                                    <p class="upload font-normal"><span class="bold">Dylan Andreson</span>, Associate</p>
+                                    <p class="upload dull-font">Customer called into say everything is great.</p>
+                                    <p class="datestamp">Today at 10:00am</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12 m-t-20" style="margin: 12px 10px;">
+                        <div class="form__group ">
+                            <div class="comment textbox">
+                                <input type="email" id="email" class="form__field grey-bg" placeholder="Say Something…">
+                                <label for="email" class="form__label">Say Something…</label>
+                            </div>
+                        </div>
+                        <div class="commentbtn textbutton">
+                            <button class="btn float-right btn-primary m-t-10">LEAVE NOTE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <button class="btn float-right btn-primary">BOOK</button>
+                <button class="btn float-right btn-secondary">SAVE & CLOSE</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+<air-grid-edit asp-partial="/Customer/Booking/AddNotificationPartial" asp-class-id="company-address-add" />
+<air-grid-edit asp-partial="/Customer/Booking/EditNotificationPartial" asp-class-id="company-address-edit" />
+<air-grid-action-confirmation asp-class-id="company-address-delete" asp-action-type="@GridActionConfirmType.DeleteAddress" asp-action="DeleteAddress" />
+<script>
+
+</script>
+<style>
+    .textbox {
+        margin-left: 10px !important;
+        width: 98% !important;
+    }
+
+    .textbutton {
+        margin-right: 23px !important;
+    }
+
+    .container {
+        position: relative;
+    }
+
+        .container img {
+            display: block;
+        }
+
+        .container .fa-download {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+</style>
+<div class="modal fade" tabindex="-1" id="contactBookingModal"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 1500px!important;">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#bookingContact").click(function (e) {
+        e.preventDefault();
+        var quoteId = '@Model.QuoteId';
+        $.get('@Url.Action("AddBookingContactPartial", "Booking")', { quoteId: quoteId }).done(function (res) {
+               $contactBookingModalPopupModal = $("#contactBookingModal");
+               $contactBookingModalPopupModal.find("div.modal-content").html(res);
+               $contactBookingModalPopupModal.modal("show");
+           });
+    });
+    $("#consigneeContact").click(function (e) {
+        e.preventDefault();
+        var quoteId = '@Model.QuoteId';
+        $.get('@Url.Action("AddBookingContactPartial", "Booking")', { quoteId: quoteId }).done(function (res) {
+               $contactBookingModalPopupModal = $("#contactBookingModal");
+               $contactBookingModalPopupModal.find("div.modal-content").html(res);
+               $contactBookingModalPopupModal.modal("show");
+           });
+    });
+     $("#pickUpContact").click(function (e) {
+        e.preventDefault();
+        var quoteId = '@Model.QuoteId';
+        $.get('@Url.Action("AddBookingContactPartial", "Booking")', { quoteId: quoteId }).done(function (res) {
+               $contactBookingModalPopupModal = $("#contactBookingModal");
+               $contactBookingModalPopupModal.find("div.modal-content").html(res);
+               $contactBookingModalPopupModal.modal("show");
+           });
+    });
+
+
+</script>
+
+
+

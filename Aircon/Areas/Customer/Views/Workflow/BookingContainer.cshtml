@@ -1,0 +1,86 @@
+﻿@using Aircon.Business.Models.Customer.Bookings
+
+@model List<BookingModel>
+
+<div class="card-body p-0 mob-mt-40 collapse show" id="collapseTwo" style="max-height: 272px;overflow-y:auto;">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        @foreach (var item in Model)
+        {
+            <div class="table-card green">
+                <div class="row">
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <h5 class="subtitle1">@item.CustomerName</h5>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title"></h6>
+                                <p class="text-muted mb-0 route">@item.Route</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">TYPE</h6>
+                                <p class="text-muted mb-0">@item.Type</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">CHARGEABLE WEIGHT</h6>
+                                <p class="text-muted mb-0">@item.ChargeableWeight</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">VOLUME</h6>
+                                <p class="text-muted mb-0">@item.Volume</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">QUANTITY</h6>
+                                <p class="text-muted mb-0">@item.Quantity</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">SERVICE LEVEL</h6>
+                                <p class="text-muted mb-0">@item.ServiceLevel</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">ARRIVES ON</h6>
+                                <p class="text-muted mb-0">@item.ArrivesOn</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">Quote ID</h6>
+                                <p class="text-muted mb-0">@item.Id</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-7 col-sm-6 col-10">
+                        <span class="bookingdltbtn float-right round-icon bdelete"><i class="mdi mdi-delete" aria-hidden="true"></i> </span>
+                        <span class="bookingeditbtn float-right round-icon bedit"><i class="mdi mdi-pencil" aria-hidden="true"></i> </span>
+                    </div>                    
+                </div>
+            </div>
+        }
+    </div>
+</div>

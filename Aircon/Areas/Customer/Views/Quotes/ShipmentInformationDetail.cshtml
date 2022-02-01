@@ -1,0 +1,66 @@
+﻿@using Aircon.Areas.Customer.Models.ShipmentInformation
+
+@model List<ShipmentInformationDetailViewModel>
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card m-t-20">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Shipment Details</h6></div>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form_field_outer">
+            <button id="addshipmentdetail" class="btn float-right btn-primary" style="margin-top: -46px;">Add ShipmentDetail</button>
+            @for (var i = 0; i <= Model.Count; i++)
+            {
+                <div class="card form_field_outer_row ">
+                    <div class="row ">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6 m-b-0"><h6 class="card-header bold">ITEM</h6></div>
+                    </div>
+
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="row" style="margin-top:-26px">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 ">
+                                <air-input asp-for="@Model[i].Quantity" itemid="quantity"></air-input>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 ">
+                                <air-input asp-for="@Model[i].Length" itemid="length"></air-input>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 ">
+                                <air-input asp-for="@Model[i].Width" itemid="width"></air-input>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 ">
+                                <air-input asp-for="@Model[i].Weight" itemid="weight"></air-input>
+                            </div>
+                            <div class="col-xl-2 col-lg-3 col-md-2 col-sm-12 col-12 ">
+                                <air-input asp-for="@Model[i].Height" itemid="height"></air-input>
+                            </div>
+                            <div class="col-md-2 m-t-20">
+                                <button id="add-button" value="AddShippingDetail" class="btn float-right btn-secondary add_node_btn_frm_field"><span class="mdi mdi-plus-circle" /></button>
+                                <button id="remove-button" value="DeleteShippingDetail" class="btn float-right btn-secondary remove_node_btn_frm_field"><span class="mdi mdi-minus-circle" /></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="shipmentInformationDetailModal"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 1100px!important;">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+<script>
+    $("#addshipmentdetail").click(function (e) {
+           e.preventDefault();
+           $.get('@Url.Action("ShipmentInformationDetailPartial", "Quotes")', {}).done(function (res) {
+               $shipmentInformationDetailModal = $("#shipmentInformationDetailModal");
+               $shipmentInformationDetailModal.find("div.modal-content").html(res);
+               $shipmentInformationDetailModal.modal("show");
+           });
+   });
+</script>

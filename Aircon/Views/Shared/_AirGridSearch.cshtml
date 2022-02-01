@@ -1,0 +1,24 @@
+﻿@using  Aircon.Models
+@model AirGridSearchModel
+
+
+<form asp-action="Search">
+    <div class="searchtxtbox">
+        <svg class="search-icon" width="23" height="23" viewBox="0 0 23 23">
+            <g id="Group_9" data-name="Group 9" transform="translate(-0.123)">
+                <g id="Component_209_1" data-name="Component 209 – 1" transform="translate(0.123)">
+                    <rect id="Rectangle_693" data-name="Rectangle 693" width="23" height="23" fill="none" />
+                    <path id="Path_208" data-name="Path 208" d="M22.9,20.883l-4.753-4.753a9.861,9.861,0,0,0,2.016-6.049A10.02,10.02,0,0,0,10.082,0,10.02,10.02,0,0,0,0,10.082,10.02,10.02,0,0,0,10.082,20.163a9.861,9.861,0,0,0,6.049-2.016L20.884,22.9ZM2.88,10.082a7.131,7.131,0,0,1,7.2-7.2,7.131,7.131,0,0,1,7.2,7.2,7.131,7.131,0,0,1-7.2,7.2A7.131,7.131,0,0,1,2.88,10.082Z" fill="#616161" />
+                </g>
+            </g>
+        </svg>
+        @Html.HiddenFor(x => x.SearchActionName)
+        <input type="text" id="search" name="search" value="@TempData.Peek("SearchText")" class="search-input form__field wicont" placeholder="@Model.PlaceHolder" />
+        <label for="search" class="form__label wicon">@Model.PlaceHolder</label>
+        <button type="reset" class="btn resetbtn" asp-action="ResetSearch" onClick="window.location.reload()"><i class="mdi mdi-close"></i></button>
+    </div>
+    <div class="searchbtn">
+        <button type="submit" class="btn float-right btn-primary"><i class="mdi mdi-magnify w-hidden"></i><span class="m-hidden">SEARCH</span></button>
+    </div>
+</form>
+

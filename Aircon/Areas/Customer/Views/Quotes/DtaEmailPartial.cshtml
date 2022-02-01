@@ -1,0 +1,197 @@
+﻿@using Aircon.Areas.Customer.Models.Quotes
+<link href="~/assets/libs/css/style.css" rel="stylesheet" />
+
+@model QuotePricingViewModel
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
+<div id="divContents">
+    <div class="modal-header">
+        <h4 class="text-center m-t-10 bold headtxtdta">DOOR TO AIRPORT INT'L</h4>
+        <hr />
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="m-r-10 mdi txt-black mdi-close"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <input type="hidden" name="Id" id="Id" />
+            <table class="tableheaddta">
+                <tr>
+                    <th class="quotetabledta">Quote#:</th>
+                </tr>
+                <tr>
+                    <th class="quotetabledta">Date:</th>
+                </tr>
+            </table>
+            <h6 class="card-header bold frieghttxtdta">Frieght Information</h6>
+            <hr class="hrline1dta" />
+            <p class="pclassdta">Origin :</p>
+            <label class="lblorigindta">________________________________________________________________________________________________________</label>
+            <div class="iataorigindta"> </div>
+            <br /><br />
+            <br /><br />
+            <p class="pclassdta">Destination :</p>
+            <label class="lbldestinationdta">________________________________________________________________________________________________________</label>
+            <div class="iatadestinationdta"> </div>
+            <br /><br />
+            <br /><br />
+            <p class="pclassdta">Actual Weight :</p>
+            <label class="lblweightdta">_______________</label>
+            <p class="pclassdta" style="margin: -56px 247px;">Dim.</p>
+            <p class="pclassdta" style="margin: 20px 298px;">Weight:</p>
+            <label class="kg1dta">__________________</label>
+            <label class="kg2dta">__________________</label>
+            <label class="kg3dta">__________________</label>
+            <label class="kg4dta">__________________</label>
+            <label class="kg5dta">__________________</label>
+            <div class="dimensiondta"> </div>
+            <h6 class="card-header bold routingtxtdta">Routing Information :</h6>
+            <hr class="hrline2dta" />
+            <p class="pclassdta">Pickup Agent :</p>
+            <label class="agentmrdta">_______________________________________________________________________________________________________________________________________________________________________</label>
+            <p class="pclassdta" style="margin: -55px 200px;">NR Land Air Express-ELP</p>
+            <br /><br />
+            <br /><br />
+            <p>
+                Breakdown: FREIGHT CHARGE : (WT 553): -
+                FUEL : - SUBTOTAL:
+            </p>
+            <p class="pclassdta">Linehaul Carrier :</p>
+            <label class="linecarriermrdta">_______________________________________________________________________________________________________________________________________________________________________</label>
+            <p class="pclassdta" style="margin: -55px 200px;">Accelerated Inc.</p>
+            <br /><br />
+            <br /><br />
+            <p>
+                Breakdown: FREIGHT CHARGE : (WT 553): -
+                FUEL : - TOTAL:
+            </p>
+            <p class="pclassdta">AP Transfer :</p>
+            <label class="transfermrdta">_______________________________________________________________________________________________________________________________________________________________________</label>
+            <p class="pclassdta" style="margin: -55px 200px;">NR Land Air Express-DFW</p>
+            <br /><br />
+            <br /><br />
+            <p>
+                Breakdown: FREIGHT CHARGE: (WT 553): -
+                FUEL: -SUBTOTAL:
+            </p>
+            <p class="pclassdta">Airline Carrier :</p>
+            <label class="arlinemrdta">_______________________________________________________________________________________________________________________________________________________________________</label>
+            <p class="pclassdta" style="margin: -55px 200px;">American Airlines( GEN ) - ConfirmedFS</p>
+            <br /><br />
+            <br /><br />
+            <p>
+                Breakdown: WEIGHT: 303 - FREIGHT: - FUEL:
+                - SECURITY: - SCREENING: -AIRFREIGHT SURCHARGE:
+                TOTAL:
+            </p>
+            <p>
+                Notes Entered: Zone Airport
+            </p>
+            <p class="infodta">
+                GSA Information: American Airlines - +18002274622 - cargo.reservations@aa.com
+            </p>
+            <p class="pclassdta" style="margin: 2% 44%;">Total Cost:</p>
+            <div class="cost"> </div>
+            <br /><br />
+            <br /><br />
+            <h6 class="card-header bold additionaltxtdta">Additional Potential Airline Charges :</h6>
+            <p class="add1dta">AWB CHARGES : </p>
+            <p class="add2dta">EDI PROCESSING : </p>
+            <p class="add3dta">MANNUAL DATA ENTRY : </p>
+            <p class="add4dta">ADMINISTRATION FEE : </p>
+            <h6 class="card-header bold additionaltxtdta">7L Quote Tool :</h6>
+            <table class="tablepercentdta">
+                <tr class="trdta">
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                </tr>
+                <tr class="trdta">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="trdta">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="trdta">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <br />
+            <h6 class="card-header bold additionaltxtdta">Contact Information:</h6>
+            <hr class="hrline3dta" />
+            <p class="pickupdtadta" style="margin-left: 200px;">Pickup Agent</p>
+            <p class="pickupstatus1dta" style="margin: -21px 170px;">Land Air Express</p>
+            <br />
+            <p class="deliverydta" style="margin: -46px 483px;">Delivery Agent</p>
+            <p class="pickupstatus2dta" style="margin: 47px 458px;">Land Air Express</p>
+            <br /> <br />
+            <br /><br />
+            <p class="terminaldta" style="margin: 0px 225px;">Linehaul Transit and Terminal Information</p>
+            <table class="tablepercentdta">
+                <tr class="trdta">
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                    <th class="thpercentdta"></th>
+                </tr>
+                <tr class="trdta">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <p class="airlinedta" style="margin: 160px 295px;">Airline Information</p>
+
+            <p class="terminalinfodta" style="margin: -133px 103px;">ELP TERMINAL INFO</p>
+            <p class="terminalinfodta" style="margin: 107px 439px;">DFW TERMINAL INFO</p>
+
+
+            <br /> <br />
+            <br /><br />
+            <br /> <br />
+            <br /><br />
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <input type="hidden" id="id" name="id" />
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    <a class="btn btn-primary" asp-controller="Quotes" asp-action="DtaEmailNotification" asp-route-id="@Model.Id">Send Email</a>
+</div>
+
+
+
+
+

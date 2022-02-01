@@ -1,0 +1,97 @@
+﻿@using Aircon.Areas.Customer.Models
+
+
+@model CompanyViewModel
+@{
+    Layout = "_CustomerSettingLayout";
+    ViewData["Title"] = "Dashboard";
+}
+
+<form asp-controller="Company" asp-action="SaveData" method="post" role="form">
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card m-t-20">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Company Profile</h6></div>
+            </div>
+            <div class="card-body p-t-0">
+                <div class="txt2 ">COMPANY DETAILS</div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.EditorFor(x => x.CompanyProfile.Logo)
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="CompanyProfile.CompanyName" asp-required="true"></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="CompanyProfile.MainAddress.Line1"></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="CompanyProfile.MainAddress.Line2"></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="CompanyProfile.MainAddress.City"></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="CompanyProfile.MainAddress.State"></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="CompanyProfile.MainAddress.Zip"></air-input>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card ">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Payment Methods</h6></div>
+                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12">
+                    <button type="button" class="company-paymentmethod-add btn float-right btn-primary"><i class="mdi mdi-magnify w-hidden"></i><span class="m-hidden">ADD PAYMENT METHOD</span></button>
+                </div>
+
+            </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <partial name="_PaymentMethods" for="PaymentMethods">
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card ">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-4 col-sm-12 col-12">
+                    <h6 class="card-header bold">Addresses</h6>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12">
+
+                    <button class="btn float-right btn-secondary">UPLOAD CSV</button>
+                    <button class="btn float-right btn-secondary">DOWNLOAD CSV TEMPLATE</button>
+                    <button type="button" class="company-address-add btn float-right btn-secondary" data-id="0"><i class="mdi mdi-magnify w-hidden"></i><span class="m-hidden">ADD ADDRESS</span></button>
+
+                </div>
+            </div>
+            <partial name="_CustomerAddresses" for="CustomerAddresses">
+
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        @Html.HiddenFor(x => x.CompanyProfile.Id)
+        @Html.HiddenFor(x => x.CompanyProfile.AddressId)
+
+        <button class="btn float-right btn-primary">SAVE CHANGES</button>
+    </div>
+
+</form>
+
+<air-grid-edit asp-partial="/Customer/Company/AddAddressPartial" asp-class-id="company-address-add" />
+<air-grid-edit asp-partial="/Customer/Company/EditAddressPartial" asp-class-id="company-address-edit" />
+<air-grid-action-confirmation asp-class-id="company-address-delete" asp-action-type="@GridActionConfirmType.DeleteAddress" asp-action="DeleteAddress" />
+<air-grid-edit asp-partial="/Customer/Company/AddPaymentMethodPartial" asp-class-id="company-paymentmethod-add" />
+<air-grid-edit asp-partial="/Customer/Company/EditPaymentMethodPartial" asp-class-id="company-paymentmethod-edit" />

@@ -1,0 +1,69 @@
+﻿@using  Aircon.TagHelpers
+@model AirGridCardModel
+
+
+<div class="card collapse-container">
+    <div class="w-hidden">
+        @{ if (Model.Filters.Count > 0)
+            {
+                <div class="input-group-append be-addon">
+                    <button type="button" data-toggle="dropdown" class="btn btn-dropdown dropdown-toggle" aria-expanded="false"> @Model.Filters.FirstOrDefault().FilterDisplayName </button>
+                    <div class="dropdown-menu" x-placement="bottom-start">
+                        @{
+                            int filterCount = 0;
+                            foreach (var filter in Model.Filters)
+                            {
+                                {
+                                    filterCount++;
+                                }
+                                <a class="collapsefilterSelecter" data-action="@filter.DataAction" data-container="@Model.DataContainer" href="#"> @filter.FilterDisplayName </a>
+                                @if (@Model.Filters.Count != @filterCount)
+                                {
+                                    <div class="dropdown-divider"></div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class=" row m-hidden">
+        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12">
+            <h6 class="card-header bold">
+                @Model.Name
+            @{
+                int filterWindowCount = 0;
+                if (Model.Filters.Count > 0)
+                {
+                    foreach (var filter in Model.Filters)
+                    {
+                        filterWindowCount++;
+                        <a class="collapsefilterSelecter" data-action="@filter.DataAction" data-container="@Model.DataContainer" href="#"> <span class="tab1 p-l-20">@filter.FilterDisplayName </span></a>
+                        @if (Model.Filters.Count != filterWindowCount)
+                        {
+                            <span class="pr-16 pl-16 tab2 ">|</span>
+                        }
+                    }
+                }
+            }
+        </h6>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-4 col-sm-12 col-12 mobileHide ">
+        <p class="card-header float-right  panel-title">
+            <span class="tab1">SHOW <input data-recordcountattribute="@Model.BlockAttributeName" id="ID_@Model.BlockAttributeName" class="spinner showrecordcount" value="@Model.BlockShowRecordDisplayCount" type="number"  min="5" max="100" step="5" /></span>
+            <a role="button" data-toggle="collapse" href="#@Model.BlockAttributeName" aria-expanded="true" aria-controls="@Model.BlockAttributeName">
+                <span class='p-l-10 tab1'><span class='collapse-text'>@(@Model.HideBlock ? "EXPAND" : "COLLAPSE")</span><i class='p-l-10 collapse-icon mdi  mdi-fullscreen-exit mdi-20'></i></span>
+            </a>
+        </p>
+    </div>
+</div>
+<div class="p-0 mob-mt-40 card-body collapse @(@Model.HideBlock ? string.Empty : "show")" id="@Model.BlockAttributeName" data-hideattribute="@Model.HideBlockAttributeName">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div id="@Model.DataContainer">
+            @Model.Content
+        </div>
+    </div>
+</div>
+</div>
+

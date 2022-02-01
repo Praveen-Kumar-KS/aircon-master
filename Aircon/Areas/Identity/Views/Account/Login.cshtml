@@ -1,0 +1,127 @@
+﻿@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_IdentityLayout";
+}
+@section PageStyles{
+    <style>
+        ::-ms-reveal,
+        ::-ms-clear {
+            display: none !important;
+        }
+
+        .hideShowPassword-toggle {
+            background-color: transparent;
+            background-image: url('/assets/images/wink.png'); /* fallback */
+            background-image: url('/assets/images/wink.svg'), none;
+            background-position: 0 center;
+            background-repeat: no-repeat;
+            border: 2px solid transparent;
+            border-radius: 0.25em;
+            cursor: pointer;
+            font-size: 100%;
+            height: 44px;
+            margin: 0;
+            max-height: 100%;
+            padding: 0;
+            overflow: 'hidden';
+            text-indent: -999em;
+            width: 46px;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .hideShowPassword-toggle-hide {
+            background-position: -44px center;
+        }
+
+        .hideShowPassword-toggle:hover,
+        .hideShowPassword-toggle:focus {
+            border-color: #0088cc;
+            outline: transparent;
+        }
+
+        hideShowPassword-toggle hideShowPassword-toggle-hide:before {
+            content: "\E3E7";
+            font-family: "Material Icons";
+            display: block;
+            position: absolute;
+            right: 100%;
+            font-size: 20px;
+            color: rgb(255, 112, 62);
+        }
+
+        hideShowPassword-toggle hideShowPassword-toggle-show:before {
+            content: "\E3E7";
+            font-family: "Material Icons";
+            display: block;
+            position: absolute;
+            right: 100%;
+            font-size: 20px;
+            color: rgb(255, 112, 62);
+        }
+    </style>
+}
+
+<div class="login-box-login">
+    <div class="col-md-12 pl-0 pr-0 pb-30">
+        <h2>LOG IN</h2>
+    </div>
+    <div class="col-md-12 pl-0 pr-0">
+        <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" accept-charset="UTF-8" method="post" role="form">
+
+            <div class="form__group mb-20">
+                <input asp-for="Email" id="email" type="email" class="form__field" placeholder="Your Email" required autofocus>
+                <label for="email" class="form__label">Email</label>
+                <span asp-validation-for="Email" class="errortxt"></span>
+            </div>
+
+            <div class="form__group mb-20">
+                <input asp-for="Password" id="password" type="password" class="form__field" placeholder="Password" required>
+                <label for="password" class="form__label">Password</label>
+                <span asp-validation-for="Password" class="errortxt"></span>
+            </div>
+            <div class="mt-20">
+                <label asp-for="RememberMe" class="air-checkbox" style="display: inline-block;">
+                    @Html.DisplayNameFor(m => m.RememberMe)
+                    <input asp-for="RememberMe" />
+                    <span class="checkmark"></span>
+                </label>
+                <span class="text1">Privacy Policy and Terms of Service apply</span>
+            </div>
+            <div class="">
+                <button class="btn float-right btn-primary">LOGIN</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-12 pl-0 pr-0">
+        <hr class="">
+        <p class="mb-0"><a asp-action="ForgotPassword"> <strong>Forgot Password?</strong></a></p>
+        <p class="mb-0">Don’t have an account? <a asp-controller="SignUp" asp-action="Index"><strong>Sign Up.</strong></a></p>
+    </div>
+    <div class="col-md-12">
+        <img class="login-footer" src="/assets/images/airconlogo.png">
+    </div>
+</div>
+
+
+
+@section PageScripts {
+    <environment names="Development,Staging,Production,Testing">
+        <script src="~/lib/hideShowPassword/hideShowPassword.js"></script>
+    </environment>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#password').hidePassword(true);
+        });
+    </script>
+}
+
+
+
+
+

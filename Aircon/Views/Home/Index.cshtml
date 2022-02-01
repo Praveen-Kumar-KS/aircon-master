@@ -1,0 +1,398 @@
+﻿@model int
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form action="#">
+            <div class="form__group m-b-30">
+                <div class="searchtxtbox">
+                    <svg class="search-icon" width="23" height="23" viewBox="0 0 23 23">
+                        <g id="Group_9" data-name="Group 9" transform="translate(-0.123)">
+                            <g id="Component_209_1" data-name="Component 209 – 1" transform="translate(0.123)">
+                                <rect id="Rectangle_693" data-name="Rectangle 693" width="23" height="23" fill="none" />
+                                <path id="Path_208" data-name="Path 208" d="M22.9,20.883l-4.753-4.753a9.861,9.861,0,0,0,2.016-6.049A10.02,10.02,0,0,0,10.082,0,10.02,10.02,0,0,0,0,10.082,10.02,10.02,0,0,0,10.082,20.163a9.861,9.861,0,0,0,6.049-2.016L20.884,22.9ZM2.88,10.082a7.131,7.131,0,0,1,7.2-7.2,7.131,7.131,0,0,1,7.2,7.2,7.131,7.131,0,0,1-7.2,7.2A7.131,7.131,0,0,1,2.88,10.082Z" fill="#616161" />
+                            </g>
+                        </g>
+                    </svg>
+                    <input type="text" id="text" class="search-input form__field wicont" placeholder="Your Email" />
+                    <label for="text" class="form__label wicon">Enter Username, company name, email</label>
+                </div>
+                <div class="searchbtn">
+                    <button class="btn float-right btn-primary"><i class="mdi mdi-magnify w-hidden"></i><span class="m-hidden">Search</span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="">
+            <div id="exTab3">
+                <ul class="nav nav-pills w-hidden">
+                    <li>
+                        <a href="#1b" data-toggle="tab" class="active show">
+                            <h6 class="card-header">Queue</h6>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <h6 class="card-header pl-0 pr-0"><span>|</span></h6>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#2b" data-toggle="tab">
+                            <h6 class="card-header">Customers</h6>
+                        </a>
+                    </li>
+                </ul>
+                <hr class="mt-0 w-hidden mb-0" />
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="1b">
+                        <div class="card">
+                            <div class="row m-hidden">
+                                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12">
+                                    <h6 class="card-header bold">Queue  <a href="#."> <span class="tab1 p-l-20">Abandoned </span></a> <span class="pr-16 pl-16 tab2 ">|</span> <a href="#."><span class="tab3 font-normal">Callback Scheduled</span></a></h6>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-4 col-sm-12 col-12 mobileHide ">
+                                    <p class="card-header float-right  panel-title">
+                                        <span class="tab1">SHOW <input class="spinner" value="3" type="number" /></span>
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <span class="p-l-10 tab1">COLLAPSE<i class="p-l-10 mdi mdi-fullscreen-exit mdi-20"></i></span>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w-hidden">
+                                <div class="input-group-append be-addon">
+                                    <button type="button" data-toggle="dropdown" class="btn btn-dropdown dropdown-toggle" aria-expanded="false">Awaiting Review</button>
+                                    <div class="dropdown-menu" x-placement="bottom-start">
+                                        <a href="#" class="dropdown-item">Awaiting Review</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="#" class="dropdown-item">Denied</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-0 mob-mt-40">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="table-card green">
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12 col-12">
+                                                <h5 class="subtitle1">Aerton Logistics</h5>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">COMPANY ID</h6>
+                                                        <p class="text-muted mb-0">114546566</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">ADMIN NAME</h6>
+                                                        <p class="text-muted mb-0">Carl Benbow</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">EMAIL</h6>
+                                                        <p class="text-muted mb-0">cb@aertonlogistics.com</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">SIGNED UP</h6>
+                                                        <p class="text-muted mb-0">03 Jun 2021</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-7 col-sm-6 col-8">
+                                                <span class="float-right round-icon bclose"> <i class="mdi mdi-window-close" aria-hidden="true"></i></span>
+                                                <span class="float-right round-icon bconfirm">
+                                                    <i class="mdi mdi-check" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-card yellow">
+                                        <div class="green-card"></div>
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <h5 class="subtitle1">BG Reinhart</h5>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">COMPANY ID</h6>
+                                                        <p class="text-muted mb-0">114546566</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">ADMIN NAME</h6>
+                                                        <p class="text-muted mb-0">Carl Benbow</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">EMAIL</h6>
+                                                        <p class="text-muted mb-0">cb@aertonlogistics.com</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">SIGNED UP</h6>
+                                                        <p class="text-muted mb-0">03 Jun 2021</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-7 col-sm-6 col-8">
+                                                <span class="float-right round-icon bclose"> <i class="mdi mdi-window-close" aria-hidden="true"></i></span>
+                                                <span class="float-right round-icon bconfirm">
+                                                    <i class="mdi mdi-check" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-card red">
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <h5 class="subtitle1">Pattersion Bros</h5>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">COMPANY ID</h6>
+                                                        <p class="text-muted mb-0">114546566</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">ADMIN NAME</h6>
+                                                        <p class="text-muted mb-0">Carl Benbow</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">EMAIL</h6>
+                                                        <p class="text-muted mb-0">cb@aertonlogistics.com</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">SIGNED UP</h6>
+                                                        <p class="text-muted mb-0">03 Jun 2021</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-7 col-sm-6 col-8">
+                                                <span class="float-right round-icon bclose"> <i class="mdi mdi-window-close" aria-hidden="true"></i></span>
+                                                <span class="float-right round-icon bconfirm">
+                                                    <i class="mdi mdi-check" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="2b">
+                        <div class="card">
+                            <div class="m-b-20 w-hidden mb-0">
+                                <div class="input-group-append be-addon">
+                                    <button type="button" data-toggle="dropdown" class="btn btn-dropdown dropdown-toggle" aria-expanded="false">All</button>
+                                    <div class="dropdown-menu" x-placement="bottom-start">
+                                        <a href="#" class="dropdown-item">Active</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="#" class="dropdown-item">Inactive</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-hidden">
+                                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12">
+                                    <h6 class="card-header bold">Customers  <a href="#."> <span class="tab1 p-l-20">All </span></a><span class="pr-16 pl-16 tab2 ">|</span><a href="#."><span class="tab2"> Active</span></a> <span class="pr-16 pl-16 tab2 ">|</span> <a href="#."><span class="tab2 "> Inactive</span></a></h6>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-4 col-sm-12 col-12 mobileHide">
+                                    <p class="card-header float-right">
+                                        <span class="tab1">SHOW <input class="spinner" value="3" type="number" /></span>
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"><span class="p-l-10 tab1">COLLAPSE<i class="p-l-10 mdi mdi-fullscreen-exit mdi-20"></i></span></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-body p-0 mob-mt-40">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="table-card green">
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <h5 class="subtitle1">Wilhiem & Sons</h5>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">COMPANY ID</h6>
+                                                        <p class="text-muted mb-0">114546566</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">ADMIN NAME</h6>
+                                                        <p class="text-muted mb-0">Carl Benbow</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">EMAIL</h6>
+                                                        <p class="text-muted mb-0">cb@aertonlogistics.com</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">ACTIVE SINCE</h6>
+                                                        <p class="text-muted mb-0">03 Jun 2021</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-4 col-md-7 col-sm-6 col-10">
+                                                <span class="float-right round-icon bdelete"> <i class="mdi mdi-delete" aria-hidden="true"></i></span>
+                                                <span class="float-right round-icon bedit">
+                                                    <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                                </span>
+                                                <span class="float-right round-icon bclose"> <i class="mdi mdi-window-close" aria-hidden="true"></i></span>
+                                                <span class="float-right round-icon bconfirm">
+                                                    <i class="mdi mdi-check" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-card green">
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <h5 class="subtitle1">Glazer Company</h5>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">COMPANY ID</h6>
+                                                        <p class="text-muted mb-0">114546566</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">ADMIN NAME</h6>
+                                                        <p class="text-muted mb-0">Carl Benbow</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">EMAIL</h6>
+                                                        <p class="text-muted mb-0">cb@aertonlogistics.com</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">ACTIVE SINCE</h6>
+                                                        <p class="text-muted mb-0">03 Jun 2021</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-4 col-md-7 col-sm-6 col-10">
+                                                <span class="float-right round-icon bdelete"> <i class="mdi mdi-delete" aria-hidden="true"></i></span>
+                                                <span class="float-right round-icon bedit">
+                                                    <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                                </span>
+                                                <span class="float-right round-icon bclose"> <i class="mdi mdi-window-close" aria-hidden="true"></i></span>
+                                                <span class="float-right round-icon bconfirm">
+                                                    <i class="mdi mdi-check" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-card green">
+                                        <div class="row">
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <h5 class="subtitle1">Aerton Logistics</h5>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">COMPANY ID</h6>
+                                                        <p class="text-muted mb-0">114546566</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">ADMIN NAME</h6>
+                                                        <p class="text-muted mb-0">Carl Benbow</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">EMAIL</h6>
+                                                        <p class="text-muted mb-0">cb@aertonlogistics.com</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                                                <figure class="figure p-l-10 p-t-20">
+                                                    <figcaption class="figure-caption">
+                                                        <h6 class="figure-title">ACTIVE SINCE</h6>
+                                                        <p class="text-muted mb-0">03 Jun 2021</p>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-4 col-md-7 col-sm-6 col-10">
+                                                <span class="float-right round-icon bdelete"> <i class="mdi mdi-delete" aria-hidden="true"></i></span>
+                                                <span class="float-right round-icon bedit">
+                                                    <i class="mdi mdi-pencil" aria-hidden="true"></i>
+                                                </span>
+                                                <span class="float-right round-icon bclose"> <i class="mdi mdi-window-close" aria-hidden="true"></i></span>
+                                                <span class="float-right round-icon bconfirm">
+                                                    <i class="mdi mdi-check" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+</div>

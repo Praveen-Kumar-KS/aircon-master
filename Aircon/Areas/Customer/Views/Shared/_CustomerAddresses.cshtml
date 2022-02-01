@@ -1,0 +1,59 @@
+﻿@using Aircon.Areas.Customer.Models
+
+
+@model List<CustomerAddressViewModel>
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    @foreach (var item in Model)
+    {
+        <div class="card ">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                        <div class="txt2 ">@item.Address.NickName</div>
+                        <div class="addmore">
+                            <ul class="add-content">
+                                <li><i data-id="@item.AddressId" class="company-address-edit mdi mdi-pencil" aria-hidden="true"></i> </li>
+                                <li><i data-id="@item.AddressId" class="company-address-delete mdi mdi-delete" aria-hidden="true"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                            <div class="form__group mb-20">
+                                <div class="mdl-selectfield m-b-20">
+                                    <i class="dropdown1 mdi mdi-menu-down"></i>
+                                    <select class="browser-default" asp-for="@item.AddressTypeId" asp-items="@ViewBag.AddressTypes">
+                                        <option value="" selcted>Warehouse</option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                    </select>
+                                </div>
+                                <label for="text" class="form__label">Type</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.Address.NickName"></air-input>
+                    </div>
+                    <div class="col-xl-4 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.Address.Line1"></air-input>
+                    </div>
+                    <div class="col-xl-4 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.Address.Line2"></air-input>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.Address.City"></air-input>
+                    </div>
+                    <div class="col-xl-4 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.Address.State"></air-input>
+                    </div>
+                    <div class="col-xl-4 col-lg-3 col-md-4 col-sm-12 col-12">
+                        <air-input asp-for="@item.Address.Zip"></air-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

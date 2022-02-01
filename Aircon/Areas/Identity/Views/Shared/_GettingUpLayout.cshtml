@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "SignUp";
+
+    string backButton = (ViewData["OnboardingBackAction"] ?? string.Empty) as string;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="/assets/libs/css/login.css">
+
+    @if (IsSectionDefined("PageStyles"))
+    {
+        @RenderSection("PageStyles", required: false)}
+}
+
+<div class="dashboard-header w-hidden">
+    <nav class="navbar navbar-expand-lg bg-sandle fixed-top">
+        <a class="navbar-brand" href="index.html">
+            <i class="ml-10 mdi mdi-arrow-left txt-black m-back-icon"></i>
+        </a>
+    </nav>
+</div>
+
+<div class="login-box login-box-overlay center small">
+    <div class="await-box-quotebox col-5 center">
+        <div class="col-sm-12">
+            @if (!string.IsNullOrEmpty(backButton))
+            {
+                <div class="back-button">
+                    <a class="navbar-brand" href="/SignUp/@ViewData["OnboardingBackAction"]">
+                        <i class="ml-10 mdi mdi-arrow-left txt-black m-back-icon"></i>
+                    </a>
+                </div>
+            }
+            <div class="quote-container">
+                <img class="img-center img-responsive" src="@ViewData["OnboardingImage"]" alt="" />
+            </div>
+            <div class="login-box-formbox pull-top center">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+
+    @section Scripts {
+        @RenderSection("PageScripts", required: false)
+    }

@@ -1,0 +1,125 @@
+﻿@model UserDetailViewModel
+@using Aircon.Business.Services.Identity
+@inject ISignUpService signUpService
+@{
+    ViewData["Title"] = "USER DETAILS";
+    Layout = "_OnboardingLayout";
+    ViewData["OnboardingImage"] = "/assets/onboarding/UserDetail.png";
+    ViewData["OnboardingBackAction"] = string.Empty;
+    var branches = signUpService.GetCustomerBranches(Model.CompanyId);
+}
+
+
+
+<div class="login-box-login">
+
+    <div class="col-md-12 pl-0 pr-0 mb-20">
+        <h2>LET'S GET YOU SET UP</h2>
+        <h3 class="mt-20 font-normal">About You</h3>
+    </div>
+
+    <div class="col-md-12 pl-0 pr-0 ">
+        <form asp-controller="SignUp" asp-action="UserDetailsPost" method="post" role="form">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form__group mb-20">
+                        <input asp-for="FirstName" class="form__field" placeholder="First Name" id="firstName" type="text" autofocus>
+                        <label for="firstName" class="form__label">@Html.DisplayNameFor(x => x.FirstName)</label>
+                        <span asp-validation-for="FirstName" class="errortxt"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form__group mb-20">
+                        <input asp-for="LastName" class="form__field" placeholder="Last Name" id="lastName" type="text" autofocus>
+                        <label for="lastName" class="form__label">@Html.DisplayNameFor(x => x.LastName)</label>
+                        <span asp-validation-for="LastName" class="errortxt"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form__group mb-20">
+                        <input asp-for="Role" class="form__field" placeholder="Role" id="role" type="text" autofocus>
+                        <label for="role" class="form__label">@Html.DisplayNameFor(x => x.Role)</label>
+                        <span asp-validation-for="Role" class="errortxt"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form__group mb-20">
+                        <input asp-for="Phone" class="form__field" placeholder="Phone" id="phone" type="text" autofocus>
+                        <label for="phone" class="form__label">@Html.DisplayNameFor(x => x.Phone)</label>
+                        <span asp-validation-for="Phone" class="errortxt"></span>
+                    </div>
+                </div>
+                @if (Model.CompanyId > 0)
+                {
+                    <div class="col-md-12">
+                        <div class="form__group mb-20">
+                            <input asp-for="CompanyName" class="form__field" placeholder="Company Name" id="branchName" type="text" readonly autofocus>
+                            <label for="branchName" class="form__label">@Html.DisplayNameFor(x => x.CompanyName)</label>
+                            <span asp-validation-for="CompanyName" class="errortxt"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="form__group mb-20">
+                            <div class="mdl-selectfield mb-20">
+                                <i class="dropdown1 mdi mdi-menu-down"></i>
+                                <select asp-items="@branches" asp-for="BranchId" name="BranchId" placeholder="Select Branch" class="browser-default" required>
+                                </select>
+                            </div>
+                            <label for="text" class="form__label">Branch Name</label>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    @Html.HiddenFor(x => x.BranchName)
+                }
+                <div class="col-md-12">
+                    @Html.EditorFor(x=> x.Avatar)
+                    @*<div class="file_input_div ">
+                        <div class="row">
+                            <div class="upload-text">
+                                <div class="file_input">
+                                    <label class="upload-text">
+                                        <i class="m-r-10 mdi mdi-upload"></i>
+                                        <input id="file_input_file" class="none" type="file" />
+                                    </label>
+                                </div>
+                                <div id="file_input_text_div" class="mdl-textfield mdl-js-textfield textfield-demo">
+                                    <input class="file_input_text mdl-textfield__input no-border" type="text" disabled readonly id="file_input_text" />
+                                    <label class="mdl-textfield__label" for="file_input_text"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-8 mt-20">
+                                <p class="upload font-bold">Upload new image | Remove image</p>
+                                <p class="upload font-normal">Photos help your customers recognize you.</p>
+                            </div>
+                        </div>
+                    </div>*@
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-30">
+                    @Html.HiddenFor(x => x.UserId)
+                    @Html.HiddenFor(x => x.CompanyId)
+                    @Html.HiddenFor(x => x.CompanyName)
+                    <button class="btn float-right btn-primary">Next</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+
+
+@section PageScripts {
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/typehead/bootstrap3-typeahead.min.js"></script>
+    </environment>
+}

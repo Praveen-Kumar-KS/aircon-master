@@ -1,0 +1,280 @@
+{
+  "data": {
+    "results": [
+      {
+        "Vendors": [
+          {
+            "Pickup": {
+              "JFK": [
+                {
+                  "AgentId": "778JFK",
+                  "CompanyName": "Alpine Cartage Services",
+                  "CompanySCAC": "ACVQ",
+                  "InternalRef": "7f018eb7b301a66658931cb8a93fd6e8",
+                  "AirportCode": "JFK",
+                  "TSA": true,
+                  "Rank": "",
+                  "ContractRates": true,
+                  "TransitDays": 0,
+                  "TariffInformation": [
+                    {
+                      "ValidFrom": "2017-10-04",
+                      "ValidTo": "UFN",
+                      "Fuel": 13.5,
+                      "DimFactor": 250,
+                      "ChargeableWeight": 43,
+                      "Remarks": "MINIMUM CHARG",
+                      "Min": 17,
+                      "Max": 350,
+                      "Max53": 0,
+                      "Waived": false,
+                      "Fixed": 0,
+                      "Currency": "USD",
+                      "RateType": "PER LB",
+                      "Rate": 8.5
+                    }
+                  ],
+                  "ServiceInformation": [
+                    {
+                      "Zipcode": "10021",
+                      "City": "NEW YORK",
+                      "State": "NY",
+                      "Country": "US",
+                      "Zone": "NY-A",
+                      "Direction": "Both",
+                      "ServiceType": "",
+                      "ServiceNotes": ""
+                    }
+                  ],
+                  "Accessorials": [
+                    {
+                      "AD": {
+                        "Name": "Airport Drop",
+                        "Code": "AD",
+                        "Zone": "A",
+                        "Direction": "Both",
+                        "ChargeableWeight": 0,
+                        "Min": 11,
+                        "CallForQuote": false,
+                        "AlwaysApply": true,
+                        "Waived": true,
+                        "Rate": 0,
+                        "RateType": "PER LB",
+                        "PlusFuel": false,
+                        "FuelAmount": 0,
+                        "Subtotal": 0,
+                        "Total": 0,
+                        "Remarks": ""
+                      }
+                    }
+                  ],
+                  "Specials": [
+                    {
+                      "SAL": [
+                        {
+                          "Name": "Saturday All Day",
+                          "Code": "SAL",
+                          "Zone": "B",
+                          "Direction": "Both",
+                          "ChargeableWeight": 1,
+                          "Min": 0,
+                          "CallForQuote": false,
+                          "Rate": 85,
+                          "RateType": "FLAT",
+                          "PlusFuel": false,
+                          "FuelAmount": 0,
+                          "Subtotal": 85,
+                          "Total": 85,
+                          "Remarks": "Saturday"
+                        }
+                      ]
+                    }
+                  ],
+                  "CallForQuote": true,
+                  "TotalCharges": [
+                    {
+                      "Subtotal": 12,
+                      "FuelAmount": 2.3,
+                      "Total": 19.3,
+                      "Airport Drop": 0
+                    }
+                  ]
+                }
+              ]
+            },
+            "Delivery": {
+              "MIA": [
+                {
+                  "AgentId": "599MIA",
+                  "CompanyName": "Florida International Enterprises",
+                  "CompanySCAC": "FIEQ",
+                  "InternalRef": "0abdc563a06105aee3c6136871c9f4d1",
+                  "AirportCode": "MIA",
+                  "TSA": true,
+                  "Rank": "",
+                  "ContractRates": true,
+                  "TransitDays": 0,
+                  "TariffInformation": [
+                    {
+                      "ValidFrom": "2018-07-03",
+                      "ValidTo": "UFN",
+                      "Fuel": 15,
+                      "DimFactor": 194,
+                      "ChargeableWeight": 55,
+                      "Remarks": "string",
+                      "Min": 11,
+                      "Max": "Unknown Type: numeric",
+                      "Max53": 0,
+                      "Waived": true,
+                      "Fixed": 0,
+                      "Currency": "string",
+                      "RateType": "PER LB",
+                      "Rate": 5.67
+                    }
+                  ],
+                  "ServiceInformation": [
+                    {
+                      "Zipcode": "33133",
+                      "City": "MIAMI",
+                      "State": "FL",
+                      "Country": "US",
+                      "Zone": "A",
+                      "Direction": "Both",
+                      "ServiceType": "",
+                      "ServiceNotes": ""
+                    }
+                  ],
+                  "Accessorials": [
+                    {
+                      "AD": {
+                        "Name": "Exhibition",
+                        "Code": "EX",
+                        "Zone": "All",
+                        "Direction": "Both",
+                        "ChargeableWeight": 1,
+                        "Min": 0,
+                        "CallForQuote": false,
+                        "AlwaysApply": false,
+                        "Waived": false,
+                        "Rate": 20,
+                        "RateType": "FLAT",
+                        "PlusFuel": false,
+                        "FuelAmount": 0,
+                        "Subtotal": 20,
+                        "Total": 20,
+                        "Remarks": ""
+                      }
+                    }
+                  ],
+                  "Specials": [
+                    {
+                      "SUL": [
+                        {
+                          "Name": "Sunday All Day",
+                          "Code": "SUL",
+                          "Zone": "A",
+                          "Direction": "Both",
+                          "ChargeableWeight": 1,
+                          "Min": 0,
+                          "CallForQuote": false,
+                          "Rate": 75,
+                          "RateType": "FLAT",
+                          "PlusFuel": false,
+                          "FuelAmount": 0,
+                          "Subtotal": 75,
+                          "Total": 75,
+                          "Remarks": "Sunday"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "Airline": {
+              "JFK-MIA": [
+                {
+                  "AirlineName": "Sun Country Airlines",
+                  "AirlineCode": "SY",
+                  "Origin": "JFK",
+                  "Destination": "MIA",
+                  "ContractRates": false,
+                  "CargoOnly": false,
+                  "AllIn": true,
+                  "TariffInformation": [
+                    {
+                      "ValidFrom": "2018-07-01",
+                      "ValidTo": "2018-12-31",
+                      "PromoRate": false,
+                      "DimFactor": 194,
+                      "Remarks": "MINIMUM CHARG",
+                      "Min": 32,
+                      "Fixed": 0,
+                      "Rate": 0.32
+                    }
+                  ],
+                  "WidebodyRFSInformation": [
+                    {
+                      "Connections": [
+                        {
+                          "Origin": "JFK",
+                          "Destination": "MIA",
+                          "Flights": [
+                            {
+                              "Flight": 123,
+                              "Type": "Widebody",
+                              "Days": [
+                                {
+                                  "Mon": true,
+                                  "Tue": true,
+                                  "Wed": true,
+                                  "Thu": true,
+                                  "Fri": true,
+                                  "Sat": true,
+                                  "Sun": true
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "ServiceInformation": [
+                    {
+                      "ServiceLevel": "Weekend",
+                      "ServiceType": "Weekend",
+                      "ServiceCode": "-",
+                      "RateType": "BULK",
+                      "ZoneRate": false,
+                      "MaxWeight": 300
+                    }
+                  ],
+                  "TotalCharges": [
+                    {
+                      "Subtotal": 400,
+                      "FSC": 84,
+                      "SEC": 15,
+                      "SCN": 0,
+                      "Tax": 0,
+                      "Total": 499
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "Routing": [
+          {
+            "OriginAirport": "JFK",
+            "DestinationAirport": "MIA",
+            "CheapestCost": 63.95,
+            "Remarks": ""
+          }
+        ]
+      }
+    ],
+    "message": "string"
+  }
+}

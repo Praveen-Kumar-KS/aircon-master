@@ -1,0 +1,12 @@
+﻿@model string 
+
+<form asp-action="LogOff" asp-controller="Account" method="post">
+    <span class="pcoded-micon"><i class="fa fa-sign-out"></i></span>
+    <span class="pcoded-mtext">
+        <button type="submit" style="background: none;border: none;cursor: pointer;">
+            Logout
+        </button>
+    </span>
+    <span class="pcoded-mcaret"></span>
+    <span>@Model</span>
+</form>

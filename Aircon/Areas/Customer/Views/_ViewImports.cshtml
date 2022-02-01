@@ -1,0 +1,19 @@
+﻿@using Aircon.Areas.Identity
+@using Microsoft.AspNetCore.Identity
+@using Aircon.Extensions
+@using Aircon.Areas.Customer.Models.Company
+@using Aircon.ViewModels.Shared
+@using Aircon.Data.Enums
+@using Aircon.Models
+@using Aircon.Business.Services
+@using Aircon.Business.Services.Shared
+@using Aircon.Data.Helper;
+@using Aircon.Business.Models.Shared
+
+@inject ICommonService CommonService
+@inject IGenericAttributeService genericAttributeService
+
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@removeTagHelper Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Aircon

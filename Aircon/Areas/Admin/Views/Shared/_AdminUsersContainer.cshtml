@@ -1,0 +1,74 @@
+﻿@using Aircon.Models
+@model List<UserViewModel>
+@*Steop 9*@
+<div class="card-body p-0 mob-mt-40 collapse show" id="collapseTwo" style="max-height: 272px;overflow-y: auto;">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        @foreach (var item in Model)
+        {
+            <div class="table-card green">
+                <div class="row">
+                    <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <h5 class="subtitle1">@item.FirstName @item.LastName</h5>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">USER ID</h6>
+                                <p class="text-muted mb-0">@item.DisplayUserId</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">ROLE</h6>
+                                <p class="text-muted mb-0">@item.WorkTitle</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">EMAIL</h6>
+                                <p class="text-muted mb-0">@item.Email</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">COMPANYNAME</h6>
+                                <p class="text-muted mb-0">@item.CompanyName</p>
+                                @Html.HiddenFor(x => item.CustomerId)
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">PHONE</h6>
+                                <p class="text-muted mb-0">@item.PhoneNumber</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">ACTIVE SINCE</h6>
+                                <p class="text-muted mb-0">@(item.ApprovedDate.HasValue ? item.ApprovedDate.Value.ToString("dd MMM yyyy"): "")</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-7 col-sm-6 col-10">
+                        <span class="adminuseredit float-right round-icon bedit" data-id="@item.Id"><i class="mdi mdi-pencil" aria-hidden="true"></i></span>
+                        <span class="adminuserdeactivate float-right round-icon bclose" data-id="@item.Id"> <i class="mdi mdi-window-close" aria-hidden="true"></i></span>
+                        <span class="adminuseractivate float-right round-icon bconfirm" data-id="@item.Id"> <i class="mdi mdi-check" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<air-grid-edit asp-partial="/Admin/User/EditAdminUsersPartial" asp-class-id="adminuseredit" />
+<air-grid-action-confirmation asp-class-id="adminuseractivate" asp-action-type="@GridActionConfirmType.ActivatingUser" asp-action="ActivatingUser" />
+<air-grid-action-confirmation asp-class-id="adminuserdeactivate" asp-action-type="@GridActionConfirmType.DeactivatingUser" asp-action="DeactivatingUser" />

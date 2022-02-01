@@ -1,0 +1,42 @@
+﻿@model TermsAndConditionsViewModel
+
+@{
+    ViewData["Title"] = "USER DETAILS";
+    Layout = "_OnboardingLayout";
+    ViewData["OnboardingImage"] = "/assets/onboarding/Terms.png";
+}
+
+<div class="login-box-formbox pull-top">
+    <div class="login-box-login">
+
+
+        <div class="col-md-12 pl-0 pr-0 mb-20">
+            <h2>TERMS & CONDITIONS</h2>
+            <h3 class="mt-20 font-normal">Section 102</h3>
+        </div>
+
+        <div class="col-md-12 pl-0 pr-0 ">
+            <form asp-controller="SignUp" asp-action="TermsAndConditionsPost" method="post" role="form">
+                <div class="row">
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col-md-7 mt-30">
+                        <div class="company-progress  progress mb-10">
+                            <div class="company-progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+
+                        </div>  <span class="text3">Sign-up process</span>
+                    </div>
+                    <div class="col-md-5 mt-30">
+                        @Html.HiddenFor(x => x.CustomerOpportunityId)
+                        <button class="btn float-right btn-secondary">SCHEDULE A SUPPORT CALL</button>
+                        <button class="btn float-right btn-primary">Accept</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

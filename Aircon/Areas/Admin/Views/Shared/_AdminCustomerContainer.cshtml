@@ -1,0 +1,88 @@
+﻿@using Aircon.Areas.Admin.Models.Customer
+
+
+@model List<CustomerAdminViewModel>
+@*Steop 9*@
+<div class="card-body p-0 mob-mt-40 collapse show" id="collapseTwo" style="max-height: 272px;overflow-y: auto;">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        @{int i = 0;}
+        @foreach (var item in Model)
+        {
+            <div class="table-card green">
+                <div class="row">
+                    <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <h5 class="subtitle1">@item.CompanyName</h5>
+                    </div>
+                    <div class="col-xl-1 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">COMPANY ID</h6>
+                                <p class="text-muted mb-0">@item.DisplayCustomerId</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">ADMIN NAME</h6>
+                                <p class="text-muted mb-0">@item.AdminName</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">EMAIL</h6>
+                                <p class="text-muted mb-0">@item.AdminEmail</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 col-12">
+                        <figure class="figure p-l-10 p-t-20">
+                            <figcaption class="figure-caption">
+                                <h6 class="figure-title">ACTIVE SINCE</h6>
+                                <p class="text-muted mb-0">@(item.ApprovedDate.HasValue ? item.ApprovedDate.Value.ToString("dd MMM yyyy"): "")</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-7 col-sm-6 col-10">
+                        <span class="float-right round-icon bdelete" id="btnCustomerDelete_@i" data-id="@item.CustomerId"> <i class="mdi mdi-delete" aria-hidden="true"></i></span>
+                        <span class="customerprofileedit float-right round-icon bedit" data-id="@item.CustomerId"><i class="mdi mdi-pencil" aria-hidden="true"></i></span>
+                        <span class="admincustomerdeactivate float-right round-icon bclose" data-id="@item.CustomerId"> <i class="mdi mdi-window-close" aria-hidden="true"></i></span>
+                        <span class="admincustomeractivate float-right round-icon bconfirm" data-id="@item.CustomerId">
+                            <i class="mdi mdi-check" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            i++;
+        }
+    </div>
+</div>
+<air-grid-edit asp-partial="/Admin/Customer/EditCustomerProfilePartial" asp-class-id="customerprofileedit" />
+<air-grid-action-confirmation asp-class-id="admincustomeractivate" asp-action-type="@GridActionConfirmType.ActivateCustomer" asp-action="ActivateCustomer" />
+<air-grid-action-confirmation asp-class-id="admincustomerdeactivate" asp-action-type="@GridActionConfirmType.DeactivateCustomer" asp-action="DeactivateCustomer" />
+<div class="modal fade" tabindex="-1" id="customerDeleteModal" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+        </div>
+    </div>
+</div>       
+<script type="text/javascript">
+    $(document).ready(function () {
+        var model = '@Html.Raw(Json.Serialize(Model))';
+            var parseModel = JSON.parse(model);
+            for (var i = 0; i < parseModel.length; i++) {
+                $("#btnCustomerDelete_" + i).click(function (e) {
+                    e.preventDefault();
+                    var Id = $(this).data('id');
+                    $.get('@Url.Action("CustomerDeleteProfile", "Customer")', {Id : Id}).done(function (res) {
+                    $deleteCustomerPopupModal = $("#customerDeleteModal");
+                    $deleteCustomerPopupModal.find("div.modal-content").html(res);
+                    $deleteCustomerPopupModal.modal("show");
+                    });
+                });
+            }
+    });
+</script>

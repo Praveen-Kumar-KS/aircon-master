@@ -1,0 +1,77 @@
+﻿@model SubscriptionPageViewModel
+
+@{
+    ViewData["Title"] = "USER DETAILS";
+    Layout = "_OnboardingLayout";
+    ViewData["OnboardingImage"] = "/assets/onboarding/SubscriptionPlan.png";
+    var noOfBranches = Enum.GetValues(typeof(NoOfBranches)).Cast<NoOfBranches>().Select(v => new SelectListItem
+    {
+        Text = v.GetDescription(),
+        Value = ((int)v).ToString()
+    }).ToList();
+    var subscriptionTypes = CommonService.SubscriptionTypes();
+}
+
+<div class="login-box-login">
+
+    <div class="col-md-12 pl-0 pr-0 mb-20">
+        <h2>BUILD YOUR PLAN</h2>
+        <h3 class="mt-20 font-normal">How big is your company?</h3>
+    </div>
+
+    <div class="col-md-12 pl-0 pr-0 ">
+        <form asp-controller="SignUp" asp-action="SubscriptionPlanPost" method="post" role="form">
+            @Html.HiddenFor(x => x.CustomerOpportunityId)
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form__group mb-20">
+                        <div class="mdl-selectfield mb-20">
+                            <i class="dropdown1 mdi mdi-menu-down"></i>
+                            <select asp-items="@noOfBranches" asp-for="NoOfBranches" name="NoOfBranches" placeholder="Select No of branches" class="browser-default" required>
+                            </select>
+                        </div>
+                        <label for="text" class="form__label">No of branches</label>
+                    </div>
+                </div>
+            </div>
+            <h3 class="mt-20 font-normal">Pick a plan</h3>
+            <div class="row subscription">
+                @foreach (var item in subscriptionTypes)
+                {
+                    <div class="price-card price-pad">
+                        <div class="bg-2years border-0 rounded-0 shadow">
+                            <div class=" text-center txt-black border-0">
+                                <p class="m-0 txt-10">@item.Line1</p>
+                                <h3 class="m-0 font-bold">$@item.MonthlyAmount <span class="font-normal txt-20">/mo</span></h3>
+                            </div>
+                            <div class="bg-white card-content">
+                                @if (item.IsPopular)
+                                {
+                                    <div class="popular">MOST POPULAR</div>
+                                }
+                                <ul class="list-unstyled price">
+                                    <li class="">@item.Line2</li>
+                                    <li class="mt-10">@item.Line3 </li>
+                                    <li class="txt-10">@item.Line4</li>
+                                    <li class="mt-10">@item.Line5</li>
+                                </ul>
+                                <p class="small text-center mb-0 txt-10 lighter">Annual cost</p>
+                                <h3 class="text-center txt-20 mb-10 strong lighter">$@item.AnnualAmount</h3>
+                                <button value="@item.Id" name="SubscriptionTypeId" class="btn btn-primary center">SELECT PLAN</button>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </form>
+
+        <div class="row">
+            <div class=" col-md-7 mt-30">
+                <div class="company-progress  progress mb-10">
+                    <div class="company-progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>  <span class="text3">Sign-up process</span>
+            </div>
+        </div>
+    </div>
+</div>

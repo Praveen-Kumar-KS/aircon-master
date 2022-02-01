@@ -1,0 +1,27 @@
+﻿@model NoteListViewModel
+@using Humanizer;
+@using Aircon.Business.Avatar
+
+@inject IAvatarUserService avatarUserService
+@foreach (var item in Model.Notes)
+{
+    var user = await avatarUserService.GetUser(item.CreatedById);
+    <li>
+        <img class="img-timeline rounded-circle" src="/avatars/user/@item.CreatedById/512">
+        <div class="col-md-12 m-t-20 timeline-content ">
+            <p class="upload font-normal"><span class="bold">@user.FirstName @user.LastName</span>, @user.WorkTitle</p>
+            <p class="upload dull-font">@item.Text.</p>
+            <p class="datestamp">@item.CreatedOn.Humanize()</p>
+        </div>
+    </li>
+}
+
+@*<li>
+        <img class="img-timeline" src="assets/images/logo_per.png">
+        <div class="col-md-12 m-t-20 timeline-content ">
+            <p class="upload font-normal"><span class="bold">Helen Baar</span>, Aircon Support</p>
+            <p class="upload dull-font">Rahul called, said he mis-spelled his name. Corrected it for him.</p>
+            <p class="datestamp">Today at 10:00am</p>
+        </div>
+    </li>*@
+

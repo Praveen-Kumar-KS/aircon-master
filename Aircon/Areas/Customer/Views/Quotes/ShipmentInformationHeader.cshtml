@@ -1,0 +1,53 @@
+﻿@using Aircon.Areas.Customer.Models.ShipmentInformation
+
+@model ShipmentInformationHeaderViewModel
+    <div class="card m-t-20">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12"><h6 class="card-header bold">Shipment Information</h6></div>
+        </div>
+        <div class="card-body p-t-0">
+            <div class="row">
+                @Html.HiddenFor(x => x.Id)
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <figure class="figure m-t-10">
+                        <figcaption class="figure-caption">
+                            <h6 class="figure-title">TOTAL NUMBER OF PIECES</h6>
+                            @Html.DisplayFor(Model => Model.TotalNoOfPieces)
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <figure class="figure m-t-10">
+                        <figcaption class="figure-caption">
+                            <h6 class="figure-title">TOTAL VOLUMETRIC WEIGHT</h6>
+                            @Html.DisplayFor(Model => Model.TotalVolumetricWeight)
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <figure class="figure m-t-10">
+                        <figcaption class="figure-caption">
+                            <h6 class="figure-title">TOTAL CHARGREBLE WEIGHT</h6>
+                            @Html.DisplayFor(Model => Model.TotalChargeableWeight)
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <figure class="figure m-t-10">
+                        <figcaption class="figure-caption">
+                            <h6 class="figure-title">TOTAL VOLUME</h6>
+                            @Html.DisplayFor(Model => Model.TotalVolume)
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <figure class="figure m-t-10">
+                        <figcaption class="figure-caption">
+                            <h6 class="figure-title">TOTAL CHARGREBLE VOLUME</h6>
+                            @Html.DisplayFor(Model => Model.TotalChargeableVolume)
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
